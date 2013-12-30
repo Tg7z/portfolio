@@ -22,7 +22,44 @@
         // Otherwise assume empty
         return true;
       };
-    });
+    })
+
+    .factory('loginService',
+      ['$rootScope', '$location', 'FBURL',
+      function($rootScope, $location, FBURL) {
+        return {
+          /**
+           * @param {string} email
+           * @param {string} pass
+           * @param {string} [redirect]
+           * @param {Function} [callback]
+           * @returns {*}
+           */
+
+          login: function(email, pass, redirect, callback) {
+            $rootScope.auth.$login('password', {
+              email: email,
+              password: pass,
+              rememberMe: true
+            }).then(function(user) {
+              if( redirect ) {
+                $location.path(redirect);
+              }
+              callback && callback(null, user);
+            }, callback);
+          },
+
+          /**
+           * @param {string} [redirectPath]
+           */
+          logout: function(redirectPath) {
+            $rootScope.auth.$logout();
+            if( redirectPath ) {
+              $location.path(redirectPath);
+            }
+          }
+        };
+    }]);
 
   function errMsg(err) {
     return err? '['+err.code+'] ' + err.toString() : null;

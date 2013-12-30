@@ -21,10 +21,19 @@ angular.module('portfolio.directives', [])
     };
   })
 
-  .directive('portfolioHeader', function() {
+  .directive('blogHeader', function() {
     return {
       restrict: 'A',
-      templateUrl: 'partials/header.html'
+      templateUrl: 'partials/header.html',
+      replace: true
+    };
+  })
+
+  .directive('blogSidebar', function() {
+    return {
+      restrict: 'A',
+      templateUrl: 'partials/sidebar.html',
+      replace: true
     };
   })
 

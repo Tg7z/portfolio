@@ -11,11 +11,33 @@ angular.module('portfolioApp',
   // configure views; note the authRequired parameter for authenticated pages
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
-      templateUrl: 'partials/home.html'
+      templateUrl: 'partials/blog.html',
+      controller: 'BlogCtrl'
+    })
+
+    .when('/posts/:id', {
+      templateUrl: 'partials/blog-item.html',
+      controller: 'PostCtrl'
+    })
+
+    .when('/tags/:tag', {
+      templateUrl: 'partials/blog-tag.html',
+      controller: 'TagCtrl'
     })
 
     .when('/cv', {
       templateUrl: 'partials/cv.html'
+    })
+
+    .when('/login', {
+      templateUrl: 'partials/login.html',
+      controller: 'LoginCtrl'
+    })
+
+    .when('/add', {
+      templateUrl: 'partials/add.html',
+      controller: 'AddCtrl',
+      authRequired: true
     })
 
     .otherwise({ redirectTo: '/' });

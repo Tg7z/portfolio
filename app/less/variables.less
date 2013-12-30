@@ -9,11 +9,14 @@
 // Grays
 // -------------------------
 
-@gray-darker:            lighten(#000, 13.5%); // #222
-@gray-dark:              lighten(#000, 20%);   // #333
-@gray:                   lighten(#000, 33.5%); // #555
-@gray-light:             lighten(#000, 60%);   // #999
-@gray-lighter:           lighten(#000, 93.5%); // #eee
+@black:         #000;
+@gray-darker:   lighten(@black, 13.5%); // #222
+@gray-dark:     lighten(@black, 20%);   // #333
+@gray:          lighten(@black, 33.5%); // #555
+@gray-light:    lighten(@black, 60%);   // #999
+@gray-lighter:  lighten(@black, 93.5%); // #eee
+@off-white:     #F5F5F5;
+@white:         #FFF;
 
 // Colors
 // -------------------------
@@ -23,7 +26,7 @@
 // Scaffolding
 // -------------------------
 
-@body-bg:               #fff;
+@body-bg:               @off-white;
 @text-color:            @gray-dark;
 
 // Links

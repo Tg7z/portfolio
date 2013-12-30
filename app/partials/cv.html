@@ -1,4 +1,18 @@
-<div class="col-group" ng-mask portfolio-header></div>
+<div class="col-group">
+  <div class="col-mb-8">
+    <h1>{{bio.name}}</h1>
+    <p>
+      <a ng-href="mailto:{{bio.email}}" title="Please email me with any queries">{{bio.email}}</a><br>
+      <a ng-href="{{bio.site_url}}" title="See a selection of the profession projects I have worked on">Portfolio Website</a><br>
+      <a ng-href="tel:{{bio.phone | nospace}}">{{bio.phone}}</a><br>
+      <a ng-href="{{bio.linkedin}}" title="Visit my LinkedIn profile">li</a> <a ng-href="{{bio.git}}" title="Find me on github">gh</a> <a href="{{bio.twitter}}" title="Follow me on Twitter">tw</a>
+    </p>
+
+  </div>
+  <div class="col-mb-4">
+    <img class="profile-photo" ng-src="{{bio.profile_image}}?s=180" alt="Photo of {{bio.name}}" />
+  </div>
+</div>
 
 <div class="col-group">
   <div class="col-mb-12">
@@ -11,7 +25,7 @@
 <div class="col-group">
   <div class="col-mb-12">
     <h2>Relevant Experience</h2>
-    <p class="text-muted">References available on <a class="text-muted" ng-href="{{data.linkedin}}" title="View my references on LinkedIn">LinkedIn</a> or by request</p>
+    <p class="text-muted">References available on <a class="text-muted" ng-href="{{bio.linkedin}}" title="View my references on LinkedIn">LinkedIn</a> or by request</p>
     <p>2011 - 2013</p>
     <h3>Graphic Designer / Front End Developer at E-see International</h3>
     <p>Duties included: designing &amp; building websites from client briefs, troubleshooting for clients, general design tasks, photographing products.</p>
