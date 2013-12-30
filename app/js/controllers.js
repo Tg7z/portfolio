@@ -42,6 +42,22 @@ angular.module('portfolio.controllers', [])
       $scope.data = $firebase(refBlog);
   }])
 
+  .controller('SidebarCtrl',
+    ['$scope', 'FBURL',
+    function($scope, FBURL) {
+      $scope.showBio = false;
+      $scope.toggleBio = function() {
+        $scope.showBio = !$scope.showBio;
+      };
+  }])
+
+  .controller('TagCloudCtrl',
+    ['$scope', '$firebase', 'FBURL',
+    function($scope, $firebase, FBURL) {
+      var refTags = new Firebase(FBURL).child('/tags');
+      $scope.tags = $firebase(refTags);
+  }])
+
   .controller('LoginCtrl',
     ['$scope', 'loginService', function($scope, loginService) {
       $scope.email = null;

@@ -33,6 +33,16 @@ angular.module('portfolio.directives', [])
     return {
       restrict: 'A',
       templateUrl: 'partials/sidebar.html',
+      controller: 'SidebarCtrl',
+      replace: true
+    };
+  })
+
+  .directive('blogTags', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'partials/tag-cloud.html',
+      controller: 'TagCloudCtrl',
       replace: true
     };
   })

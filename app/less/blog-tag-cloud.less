@@ -1,0 +1,34 @@
+.blog-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-tag {
+  display: inline-block;
+  padding: 0.1em 0.7em 0.2em;
+  margin: 2px 4px 2px 0;
+
+  font-size: 12px;
+  border-radius: 1em;
+  background-color: @primary-color;
+
+  a {
+    color: @white;
+
+    .tag-count {
+      padding-left: 0.4em;
+      color: lighten(@primary-color, 25%);
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: lighten(@primary-color, 40%);
+    }
+  }
+
+  &:hover {
+    background-color: lighten(@primary-color, 7%);
+  }
+}
+
