@@ -5,12 +5,13 @@
 
 /* Controllers */
 
-angular.module('app.controllers', [])
+angular.module('portfolio.controllers', [])
 
   .controller('CoreCtrl',
-    ['$scope',
-    function($scope) {
-
+    ['$scope', '$firebase', 'FBURL',
+    function($scope, $firebase, FBURL) {
+      var ref = new Firebase(FBURL);
+      $scope.data = $firebase(ref);
   }])
   .controller('HomeCtrl',
     ['$scope',

@@ -1,0 +1,13 @@
+<div class="col-mb-8">
+  <h1>{{data.name}}</h1>
+  <p>
+    <a ng-href="mailto:{{data.email}}" title="Please email me with any queries">{{data.email}}</a><br>
+    <a ng-href="{{data.site_url}}" title="See a selection of the profession projects I have worked on">Portfolio Website</a><br>
+    <a ng-href="tel:{{data.phone | nospace}}">{{data.phone}}</a><br>
+    <a ng-href="{{data.linkedin}}" title="Visit my LinkedIn profile">li</a> <a ng-href="{{data.git}}" title="Find me on github">gh</a> <a href="{{data.twitter}}" title="Follow me on Twitter">tw</a>
+  </p>
+
+</div>
+<div class="col-mb-4">
+  <img class="profile-photo" ng-src="{{data.profile_image}}180" alt="Photo of {{data.name}}" />
+</div>

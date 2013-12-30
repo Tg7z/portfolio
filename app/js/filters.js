@@ -2,10 +2,18 @@
 
 /* Filters */
 
-angular.module('app.filters', [])
+angular.module('portfolio.filters', [])
   .filter('reverse', function() {
     return function(items) {
       return items.slice().reverse();
+    };
+  })
+
+  .filter('nospace', function() {
+    return function(input) {
+      if (input) {
+        return input.replace(/\s/g, '');
+      }
     };
   })
 

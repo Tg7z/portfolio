@@ -3,7 +3,7 @@
 /* Directives */
 
 
-angular.module('app.directives', [])
+angular.module('portfolio.directives', [])
   // Prevent default on <a> tags with an href of "#", "" or an ng-click attribute
   .directive('a', function() {
     return {
@@ -18,5 +18,19 @@ angular.module('app.directives', [])
           });
         }
       }
+    };
+  })
+
+  .directive('portfolioHeader', function() {
+    return {
+      restrict: 'A',
+      templateUrl: 'partials/header.html'
+    };
+  })
+
+  .directive('portfolioCv', function() {
+    return {
+      restrict: 'A',
+      templateUrl: 'partials/cv.html'
     };
   });

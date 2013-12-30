@@ -3,7 +3,7 @@
 
   /* Services */
 
-  angular.module('app.services', [])
+  angular.module('portfolio.services', [])
 
     .factory('isEmpty', function(){
       return function(obj){
