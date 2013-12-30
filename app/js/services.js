@@ -36,11 +36,11 @@
            * @returns {*}
            */
 
-          login: function(email, pass, redirect, callback) {
+          login: function(email, pass, remember, redirect, callback) {
             $rootScope.auth.$login('password', {
               email: email,
               password: pass,
-              rememberMe: true
+              rememberMe: remember
             }).then(function(user) {
               if( redirect ) {
                 $location.path(redirect);

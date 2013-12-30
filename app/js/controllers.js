@@ -62,11 +62,12 @@ angular.module('portfolio.controllers', [])
     ['$scope', 'loginService', function($scope, loginService) {
       $scope.email = null;
       $scope.pass = null;
+      $scope.remember = true;
 
       $scope.login = function(callback) {
         $scope.err = null;
         var redirectTo = '/add';
-        loginService.login($scope.email, $scope.pass, redirectTo, function(err, user) {
+        loginService.login($scope.email, $scope.pass, $scope.remember, redirectTo, function(err, user) {
           $scope.err = err||null;
           typeof(callback) === 'function' && callback(err, user);
         });

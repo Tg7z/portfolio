@@ -50,8 +50,11 @@ angular.module('portfolioApp',
   .constant('FBURL', firebaseURL)
 
   // establish authentication
-  .run(['$rootScope', 'FBURL', function($rootScope, FBURL) {
-    $rootScope.FBURL = FBURL;
+  .run(['$rootScope', '$firebaseAuth', 'FBURL',
+    function($rootScope, $firebaseAuth, FBURL) {
+      var ref = new Firebase(FBURL);
+      $rootScope.auth = $firebaseAuth(ref, { path: '/login' });
+      $rootScope.FBURL = FBURL;
   }]);
 
   angular.module('cvApp',
