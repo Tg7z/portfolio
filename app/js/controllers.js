@@ -76,6 +76,8 @@ angular.module('portfolio.controllers', [])
         $scope.master = { release: today, author: "Tim Geurts", tags: [] };
         $scope.tagData = $firebase(refTags);
         $scope.newTag = null;
+        // Default tag list
+        $scope.tagList = ["Portfolio", "JavaScript", "Angular", "AngularFire", "Firebase", "HTML", "CSS", "App"];
       }
       init();
 
@@ -116,7 +118,7 @@ angular.module('portfolio.controllers', [])
       $scope.addNewPost = function() {
         var refPosts = new Firebase(FBURL).child('/posts').push();
         // Get tags into array for incrementing counters
-        var tags = $scope.post.tags.split(', ');
+        var tags = $scope.post.tags;
         var allPromises = [];
         // Iterate through tags and set promises for transactions to increment tag count
         angular.forEach(tags, function(value, index){
@@ -130,8 +132,8 @@ angular.module('portfolio.controllers', [])
             } else {
               dfd.reject( error );
             }
-            allPromises.push( dfd.promise );
           });
+          allPromises.push( dfd.promise );
         });
 
         // Add promise for setting the post data
@@ -142,14 +144,15 @@ angular.module('portfolio.controllers', [])
           } else {
             dfd.resolve('post recorded');
           }
-          allPromises.push( dfd.promise );
         });
+        allPromises.push( dfd.promise );
 
         $q.all( allPromises ).then(
           function(){
             $scope.reset(); // or redirect to post
           },
-          function(){
+          function(error){
+            console.log(error);
             // error handling goes here how would I
             // roll back any data written to firebase
             alert('Error: something went wrong your post has not been created.');
