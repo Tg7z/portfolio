@@ -73,8 +73,9 @@ angular.module('portfolio.controllers', [])
         var date = new Date();
         var today = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         // Set default form values
-        $scope.master = { release: today, author: "Tim Geurts" };
+        $scope.master = { release: today, author: "Tim Geurts", tags: [] };
         $scope.tagData = $firebase(refTags);
+        $scope.newTag = null;
       }
       init();
 
@@ -88,6 +89,28 @@ angular.module('portfolio.controllers', [])
 
       $scope.reset = function() {
         $scope.post = angular.copy($scope.master);
+      };
+
+      $scope.addTag = function() {
+        $scope.post.tags.push($scope.newTag);
+        // remove tag from autocomplete list
+        var position = $scope.tagList.indexOf($scope.newTag);
+        if ( ~position ) {
+          $scope.tagList.splice(position, 1);
+        }
+        $scope.newTag = '';
+
+      };
+
+      $scope.removeTag = function(tag) {
+        console.log('remove ' + tag);
+        var position = $scope.post.tags.indexOf(tag);
+        if ( ~position ) {
+          $scope.post.tags.splice(position, 1);
+        }
+        // add tag back into autocomplete list
+        $scope.tagList.push(tag);
+        $scope.newTag = '';
       };
 
       $scope.addNewPost = function() {

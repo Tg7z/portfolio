@@ -12,19 +12,20 @@
   font-size: 12px;
   border-radius: 1em;
   background-color: @primary-color;
+  color: @white;
 
   a {
     color: @white;
-
-    .tag-count {
-      padding-left: 0.4em;
-      color: lighten(@primary-color, 25%);
-    }
 
     &:hover {
       text-decoration: none;
       color: lighten(@primary-color, 40%);
     }
+  }
+
+  .tag-count, .tag-remove {
+    padding-left: 0.4em;
+    color: lighten(@primary-color, 25%);
   }
 
   &:hover {

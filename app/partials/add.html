@@ -4,7 +4,7 @@
 <div class="blog-content add-post">
   <h2>Add Post</h2>
   <hr />
-  <form role="form">
+  <form name="form-post" role="form">
     <div class="form-group">
       <label for="title">Title</label>
       <input class="form-control" name="title" type="text" ng-model="post.title" />
@@ -14,10 +14,17 @@
       <textarea class="form-control" rows="5" name="content" ng-model="post.content"></textarea>
     </div>
     <div class="form-group">
-      <label for="tags">Tags</label>
-      <input class="form-control" name="tags" type="text" ng-model="post.tags" typeahead="tag for tag in tagList | filter:$viewValue | limitTo:8" typeahead-loading="loadingTags" />
+      <label for="add_tag">Tags</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="newTag" name="add_tag" typeahead="tag for tag in tagList | filter:$viewValue | limitTo:8" typeahead-loading="loadingTags" typeahead-on-select="addTag()">
+        <span class="input-group-btn">
+          <button class="btn" ng-click="addTag()" type="button">Add new tag</button>
+        </span>
+      </div>
+      <ul class="blog-tags">
+        <li ng-repeat="tag in post.tags" class="blog-tag">{{tag}}<a href="#" class="tag-remove" data-ng-click="removeTag(tag)" title="Remove {{tag}}">&times;</a></li>
+      </ul>
     </div>
-    <pre>Model: {{post.tags | json}}</pre>
     <div class="form-group">
       <label for="hero_image">Hero Image</label>
       <input class="form-control" name="hero_image" type="text" ng-model="post.hero_img" />
