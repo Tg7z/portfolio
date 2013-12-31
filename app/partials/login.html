@@ -1,19 +1,24 @@
-<h2>Login</h2>
-<hr />
-<form role="Login Form">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input class="form-control" name="email" type="text" ng-model="email" />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input class="form-control" name="password" type="password" ng-model="pass" />
-  </div>
-  <div class="checkbox">
-    <label><input ng-model="remember" type="checkbox"> Remember me</label>
-  </div>
-  <button class="btn btn-primary" ng-click="login()">Log In</button>
-  <a class="btn" href="#/register" title="Sign up for an account">Create Account</a>
+<header blog-header></header>
+<div blog-sidebar></div>
 
-  <p ng-show="err" class="error">{{err}}</p>
-</form>
+<div class="blog-content login-page">
+  <h2>Login</h2>
+  <hr />
+  <form role="Login Form">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" name="email" type="text" ng-model="email" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input class="form-control" name="password" type="password" ng-model="pass" />
+    </div>
+    <div class="checkbox">
+      <label><input ng-model="remember" type="checkbox"> Remember me</label>
+    </div>
+    <button class="btn btn-primary" ng-click="login()">Log In</button>
+    <a class="btn" href="#/register" title="Sign up for an account">Create Account</a>
+
+    <p ng-show="err" class="error">{{err}}</p>
+  </form>
+</div>

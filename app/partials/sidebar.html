@@ -3,14 +3,11 @@
     <img class="img-responsive sidebar-profile-img" ng-src="{{bio.profile_image}}?s=200" alt="Photo of {{bio.name}}">
     <h5>The Author</h5>
     <h4>{{bio.name}}</h4>
-    <p>Born and raised in New Zealand I have decided it is fianlly time to fly the coop and discover what it's like on the other side of the world.<span ng-show="!showBio" ng-click="toggleBio()">.. <a href="#">more</a></span></p>
-    <div ng-show="showBio">
-      <p>Often frustrated by counter-intuitive user experiences and excited by the challenge of emerging technologies and the ever changing ways we interact with the web; I hope to contribute to solutions that are not only beautiful but also intuitive for end users and easily maintainable for future developers.</p>
-      <p><span ng-click="toggleBio()"><a href="#">Less</a></span></p>
-    </div>
+    <p>Excited by the challenge of emerging technologies and the ever changing ways we interact with the web and often frustrated by counter-intuitive user experiences. This blog chronicles emerging web technologies and shining examples of user experience on the web.</p>
     <hr class="thin">
     <p>
       <a ng-href="#" title="View my portfolio">Portfolio</a><br>
+      <a ng-href="#/bio" title="More about me">More about me</a><br>
       <a ng-href="#/cv" title="Read my Curriculum Vitae, I might be right for you">Curriculum Vitae</a>
     </p>
     <p>

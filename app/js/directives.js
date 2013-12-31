@@ -23,7 +23,7 @@ angular.module('portfolio.directives', [])
 
   .directive('blogHeader', function() {
     return {
-      restrict: 'A',
+      restrict: 'EA',
       templateUrl: 'partials/header.html',
       replace: true
     };
@@ -31,9 +31,8 @@ angular.module('portfolio.directives', [])
 
   .directive('blogSidebar', function() {
     return {
-      restrict: 'A',
+      restrict: 'EA',
       templateUrl: 'partials/sidebar.html',
-      controller: 'SidebarCtrl',
       replace: true
     };
   })
@@ -49,7 +48,7 @@ angular.module('portfolio.directives', [])
 
   .directive('portfolioCv', function() {
     return {
-      restrict: 'A',
+      restrict: 'EA',
       templateUrl: 'partials/cv.html'
     };
   });

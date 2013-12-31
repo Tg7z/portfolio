@@ -1,1 +1,34 @@
-<h2>Add Post</h2>
+<header blog-header></header>
+<div blog-sidebar></div>
+
+<div class="blog-content add-post">
+  <h2>Add Post</h2>
+  <hr />
+  <form role="form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input class="form-control" name="title" type="text" ng-model="post.title" />
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea class="form-control" rows="5" name="content" ng-model="post.content"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <input class="form-control" name="tags" type="text" ng-model="post.tags" typeahead="tag for tag in tagList | filter:$viewValue | limitTo:8" typeahead-loading="loadingTags" />
+    </div>
+    <pre>Model: {{post.tags | json}}</pre>
+    <div class="form-group">
+      <label for="hero_image">Hero Image</label>
+      <input class="form-control" name="hero_image" type="text" ng-model="post.hero_img" />
+    </div>
+    <div class="form-group">
+      <label for="via">via</label>
+      <input class="form-control" name="via" type="text" ng-model="post.via" />
+    </div>
+    <div class="checkbox">
+      <label><input ng-model="post.featured" type="checkbox"> This is a <em>featured post</em></label>
+    </div>
+    <button class="btn btn-primary" ng-click="addNewPost()">Post!</button>
+  </form>
+</div>

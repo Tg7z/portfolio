@@ -42,20 +42,11 @@ angular.module('portfolio.controllers', [])
       $scope.data = $firebase(refBlog);
   }])
 
-  .controller('SidebarCtrl',
-    ['$scope', 'FBURL',
-    function($scope, FBURL) {
-      $scope.showBio = false;
-      $scope.toggleBio = function() {
-        $scope.showBio = !$scope.showBio;
-      };
-  }])
-
   .controller('TagCloudCtrl',
     ['$scope', '$firebase', 'FBURL',
     function($scope, $firebase, FBURL) {
       var refTags = new Firebase(FBURL).child('/tags');
-      $scope.tags = $firebase(refTags);
+      $scope.tagData = $firebase(refTags);
   }])
 
   .controller('LoginCtrl',
@@ -75,32 +66,72 @@ angular.module('portfolio.controllers', [])
   }])
 
   .controller('AddCtrl',
-    ['$scope', 'FBURL',
-    function($scope, FBURL) {
+    ['$scope', '$q', '$firebase', 'FBURL',
+    function($scope, $q, $firebase, FBURL) {
       var init = function init() {
+        var refTags = new Firebase(FBURL).child('/tags');
         var date = new Date();
         var today = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         // Set default form values
         $scope.master = { release: today, author: "Tim Geurts" };
+        $scope.tagData = $firebase(refTags);
       }
       init();
+
+      $scope.tagData.$on('loaded', function (value) {
+        var tags = [];
+        angular.forEach(value, function(v, k){
+          tags.push(k);
+        });
+        $scope.tagList = tags;
+      })
 
       $scope.reset = function() {
         $scope.post = angular.copy($scope.master);
       };
 
       $scope.addNewPost = function() {
-        var ref = new Firebase(FBURL).child('/posts').push();
-        var onComplete = function(error) {
+        var refPosts = new Firebase(FBURL).child('/posts').push();
+        // Get tags into array for incrementing counters
+        var tags = $scope.post.tags.split(', ');
+        var allPromises = [];
+        // Iterate through tags and set promises for transactions to increment tag count
+        angular.forEach(tags, function(value, index){
+          var dfd = $q.defer();
+          var refTag = new Firebase(FBURL).child('/tags/' + value);
+          refTag.transaction( function (current_value) {
+            return current_value + 1;
+          }, function(error, committed, snapshot) {
+            if (committed) {
+              dfd.resolve( snapshot );
+            } else {
+              dfd.reject( error );
+            }
+            allPromises.push( dfd.promise );
+          });
+        });
+
+        // Add promise for setting the post data
+        var dfd = $q.defer();
+        refPosts.set( $scope.post, function(error) {
           if (error) {
-            alert('Error: Something went wrong when creating your post please try again');
-            throw new Error(error);
+            dfd.reject(error);
+          } else {
+            dfd.resolve('post recorded');
           }
-          else {
+          allPromises.push( dfd.promise );
+        });
+
+        $q.all( allPromises ).then(
+          function(){
             $scope.reset(); // or redirect to post
+          },
+          function(){
+            // error handling goes here how would I
+            // roll back any data written to firebase
+            alert('Error: something went wrong your post has not been created.');
           }
-        };
-        ref.set($scope.post, onComplete);
+        );
       };
 
       $scope.reset();
