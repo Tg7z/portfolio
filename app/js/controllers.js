@@ -70,16 +70,32 @@ angular.module('portfolio.controllers', [])
     function($scope, $q, $firebase, FBURL) {
       var init = function init() {
         var refTags = new Firebase(FBURL).child('/tags');
-        var date = new Date();
-        var today = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
         // Set default form values
-        $scope.master = { release: today, author: "Tim Geurts", tags: [] };
-        $scope.tagData = $firebase(refTags);
-        $scope.newTag = null;
+        $scope.master = { author: "Tim Geurts", tags: [] };
+
         // Default tag list
         $scope.tagList = ["Portfolio", "JavaScript", "Angular", "AngularFire", "Firebase", "HTML", "CSS", "App"];
+        $scope.tagData = $firebase(refTags);
+        $scope.newTag = null;
       }
       init();
+
+      // Date picker controls
+
+      $scope.dateOptions = {
+        'year-format': "'yy'",
+        'starting-day': 1
+      };
+
+      $scope.openDate = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+      };
+
+      // Tag controls
 
       $scope.tagData.$on('loaded', function (value) {
         var tags = [];
@@ -87,11 +103,7 @@ angular.module('portfolio.controllers', [])
           tags.push(k);
         });
         $scope.tagList = tags;
-      })
-
-      $scope.reset = function() {
-        $scope.post = angular.copy($scope.master);
-      };
+      });
 
       $scope.addTag = function() {
         $scope.post.tags.push($scope.newTag);
@@ -100,19 +112,47 @@ angular.module('portfolio.controllers', [])
         if ( ~position ) {
           $scope.tagList.splice(position, 1);
         }
-        $scope.newTag = '';
+        $scope.newTag = null;
 
       };
 
       $scope.removeTag = function(tag) {
-        console.log('remove ' + tag);
         var position = $scope.post.tags.indexOf(tag);
         if ( ~position ) {
           $scope.post.tags.splice(position, 1);
         }
         // add tag back into autocomplete list
         $scope.tagList.push(tag);
-        $scope.newTag = '';
+        $scope.newTag = null;
+      };
+
+      // Form controls
+
+      $scope.updateRelease = function() {
+        var release_time = $scope.release_time;
+        var release = $scope.release_date;
+        if (release) {
+          // update time based on user selected time
+          release.setHours(release_time.getHours());
+          release.setMinutes(release_time.getMinutes());
+          release.setSeconds('00');
+        } else {
+          // fallback default to now
+          release = new Date();
+        }
+        $scope.post.release = release;
+      };
+
+      $scope.resetRelease = function() {
+        var now = new Date();
+        $scope.release_date = now;
+        $scope.release_time = now;
+        $scope.master.release = now;
+      }
+
+      $scope.resetForm = function() {
+        $scope.resetRelease();
+        $scope.post = angular.copy($scope.master);
       };
 
       $scope.addNewPost = function() {
@@ -160,5 +200,5 @@ angular.module('portfolio.controllers', [])
         );
       };
 
-      $scope.reset();
+      $scope.resetForm();
   }]);
