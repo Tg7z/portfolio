@@ -11,6 +11,8 @@ angular.module('portfolioApp',
 
   // configure views; note the authRequired parameter for authenticated pages
   .config(['$routeProvider', function($routeProvider) {
+  //.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    //$locationProvider.html5Mode(true);
     $routeProvider.when('/', {
       templateUrl: 'partials/blog.html',
       controller: 'BlogCtrl'
@@ -24,6 +26,11 @@ angular.module('portfolioApp',
     .when('/tags/:tag', {
       templateUrl: 'partials/blog-tag.html',
       controller: 'TagCtrl'
+    })
+
+    .when('/search', {
+      templateUrl: 'partials/search.html',
+      controller: 'SearchCtrl'
     })
 
     .when('/cv', {

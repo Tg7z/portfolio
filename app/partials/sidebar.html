@@ -6,7 +6,7 @@
     <p>Excited by the challenge of emerging technologies and the ever changing ways we interact with the web and often frustrated by counter-intuitive user experiences. This blog chronicles emerging web technologies and shining examples of user experience on the web.</p>
     <hr class="thin">
     <p>
-      <a href="#" title="View my portfolio">Portfolio</a><br>
+      <a href="#/tags/Portfolio" title="View my portfolio">Portfolio</a><br>
       <a href="#/bio" title="More about me">More about me</a><br>
       <a href="#/cv" title="Read my Curriculum Vitae, I might be right for you">Curriculum Vitae</a>
     </p>
@@ -20,9 +20,9 @@
     <h5>Search</h5>
     <form role="search" name="search">
       <div class="input-group">
-        <input type="text" class="form-control" name="query">
+        <input type="text" class="form-control" name="query" ng-model="query">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
+          <button class="btn btn-default" type="button" ng-click="keywordSearch()">Go!</button>
         </span>
       </div>
     </form>

@@ -3,6 +3,74 @@
 /* Filters */
 
 angular.module('portfolio.filters', [])
+  .filter('releaseDate', function(){
+    // Filter out posts that aren't released
+    return function(assets) {
+      var now = new Date().getTime();
+      var released = {};
+      angular.forEach(assets, function(value, key) {
+        if (typeof value === 'function') {
+          // maintain $(firebase) functions
+          released[key] = value;
+        } else if (now > parseInt(value.release, 10)) {
+          // keep released posts
+          released[key] = value;
+        }
+      });
+      return released;
+    };
+  })
+
+  .filter('searchTag', function(){
+    // Filter out posts that aren't released
+    return function(assets, tag) {
+      var results = {};
+      angular.forEach(assets, function(value, key) {
+        if (typeof value === 'function') {
+          // maintain $(firebase) functions
+          results[key] = value;
+        } else {
+          // filter tags
+          var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
+
+          if (tags.indexOf(tag.toLowerCase()) >= 0) {
+            results[key] = value;
+          }
+        }
+      });
+      return results;
+    };
+  })
+
+  .filter('searchQuery', function(){
+    // Filter out posts that aren't released
+    return function(assets, query) {
+      var results = {};
+      angular.forEach(assets, function(value, key) {
+        if (typeof value === 'function') {
+          // maintain $(firebase) functions
+          results[key] = value;
+        } else {
+          var searchScore = 0;
+          // Search rules
+          var checkTag = function(q) {
+            var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
+            if (tags.indexOf(q.toLowerCase()) >= 0) { results[key] = value; }
+          };
+
+          if (query.q) {
+            var q = query.q;
+            // check data based on specificity of search
+            if (!query.t) { checkTag(q); }
+          }
+          // search tags
+          if (query.t) { checkTag(query.t); }
+        }
+      });
+      return results;
+    };
+  })
+
   .filter('reverse', function() {
     return function(items) {
       return items.slice().reverse();

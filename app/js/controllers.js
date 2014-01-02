@@ -19,17 +19,18 @@ angular.module('portfolio.controllers', [])
   }])
 
   .controller('BlogCtrl',
-    ['$scope', '$firebase', 'FBURL',
-    function($scope, $firebase, FBURL) {
-      var refBlog = new Firebase(FBURL).child('/blog');
-      $scope.posts = $firebase(refBlog);
+    ['$scope', '$location', '$firebase', 'FBURL',
+    function($scope, $location, $firebase, FBURL) {
+      var refPosts = new Firebase(FBURL).child('/posts');
+      $scope.posts = $firebase(refPosts);
+      $scope.q = $location.search();
   }])
 
   .controller('PostCtrl',
     ['$scope', '$routeParams', '$firebase', 'FBURL',
     function($scope, $routeParams, $firebase, FBURL) {
       $scope.assetId = $routeParams.id;
-      var refPost = new Firebase(FBURL).child('/blog/' + $scope.assetId);
+      var refPost = new Firebase(FBURL).child('/posts/' + $scope.assetId);
       $scope.data = $firebase(refPost);
   }])
 
@@ -38,8 +39,17 @@ angular.module('portfolio.controllers', [])
     function($scope, $routeParams, $firebase, FBURL) {
       $scope.tag = $routeParams.tag;
 
-      var refBlog = new Firebase(FBURL).child('/blog');
-      $scope.data = $firebase(refBlog);
+      var refPosts = new Firebase(FBURL).child('/posts');
+      $scope.posts = $firebase(refPosts);
+  }])
+
+  .controller('SearchCtrl',
+    ['$scope', '$location', '$firebase', 'FBURL',
+    function($scope, $location, $firebase, FBURL) {
+      $scope.q = $location.search();
+
+      var refPosts = new Firebase(FBURL).child('/posts');
+      $scope.posts = $firebase(refPosts);
   }])
 
   .controller('TagCloudCtrl',
@@ -47,6 +57,14 @@ angular.module('portfolio.controllers', [])
     function($scope, $firebase, FBURL) {
       var refTags = new Firebase(FBURL).child('/tags');
       $scope.tagData = $firebase(refTags);
+  }])
+
+  .controller('SidebarCtrl',
+    ['$scope', '$location', function($scope, $location) {
+      $scope.query = $location.search().q;
+      $scope.keywordSearch = function() {
+        $location.path('/search').search('q', $scope.query);
+      };
   }])
 
   .controller('LoginCtrl',
@@ -75,7 +93,7 @@ angular.module('portfolio.controllers', [])
         $scope.master = { author: "Tim Geurts", tags: [] };
 
         // Default tag list
-        $scope.tagList = ["Portfolio", "JavaScript", "Angular", "AngularFire", "Firebase", "HTML", "CSS", "App"];
+        $scope.tagList = ["Portfolio", "JavaScript", "AngularJS", "AngularFire", "Firebase", "HTML", "CSS", "App"];
         $scope.tagData = $firebase(refTags);
         $scope.newTag = null;
       }
@@ -140,14 +158,14 @@ angular.module('portfolio.controllers', [])
           // fallback default to now
           release = new Date();
         }
-        $scope.post.release = release;
+        $scope.post.release = release.getTime();
       };
 
       $scope.resetRelease = function() {
         var now = new Date();
         $scope.release_date = now;
         $scope.release_time = now;
-        $scope.master.release = now;
+        $scope.master.release = now.getTime();
       }
 
       $scope.resetForm = function() {
@@ -189,7 +207,7 @@ angular.module('portfolio.controllers', [])
 
         $q.all( allPromises ).then(
           function(){
-            $scope.reset(); // or redirect to post
+            $scope.resetForm(); // or redirect to post
           },
           function(error){
             console.log(error);

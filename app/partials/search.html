@@ -2,9 +2,10 @@
 <div blog-sidebar></div>
 
 <div class="blog-content">
-  <h2>{{tag}}</h2>
+  <h2>Search Results</h2>
+  <h4>Query: {{q.q}}</h4>
   <ul>
-    <li ng-repeat="(id,post) in posts | releaseDate | searchTag:tag" class="list-item">
+    <li ng-repeat="(id,post) in posts | releaseDate | searchQuery:q" class="list-item">
       <a ng-href="#/posts/{{id}}" title="{{post.title}}">{{post.title}}</a>
     </li>
   </ul>

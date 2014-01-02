@@ -18,26 +18,23 @@
       <input class="form-control" name="hero_image" type="text" ng-model="post.hero_img" />
     </div>
     <div class="form-group">
-      <label>Post Time</label>
-      <div ng-model="release_time" ng-change="updateRelease()" style="display:inline-block;">
-        <timepicker show-meridian="false" mousewheel="false"></timepicker>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="release">Post Date</label>
-      <div class="input-group">
-        <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" ng-model="release_date" is-open="opened" min="dt" datepicker-options="dateOptions" show-button-bar="false" show-weeks="false" ng-change="updateRelease()" ng-required="true" />
+      <label class="release-label" for="release">Release Date/Time</label>
+      <div class="input-group release-controls">
+        <div class="input-group-addon release-time" ng-model="release_time" ng-change="updateRelease()">
+          <timepicker show-meridian="false" mousewheel="false"></timepicker>
+        </div>
+        <input type="text" class="form-control release-date" datepicker-popup="dd-MMM-yyyy" ng-model="release_date" is-open="opened" min="dt" datepicker-options="dateOptions" show-button-bar="false" show-weeks="false" ng-change="updateRelease()" ng-required="true" />
         <span class="input-group-btn">
-          <button class="btn btn-default" ng-click="openDate($event)">Open datepicker</button>
+          <button class="btn btn-default" ng-click="openDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>
       </div>
     </div>
     <div class="form-group">
       <label for="add_tag">Tags</label>
-      <div class="input-group">
+      <div class="input-group tag-control">
         <input type="text" class="form-control" ng-model="newTag" name="add_tag" typeahead="tag for tag in tagList | filter:$viewValue | limitTo:8" typeahead-loading="loadingTags" typeahead-on-select="addTag()">
         <span class="input-group-btn">
-          <button class="btn" ng-click="addTag()" type="button">Add new tag</button>
+          <button class="btn btn-success" ng-click="addTag()" type="button"><i class="glyphicon glyphicon-plus"></i> tag</button>
         </span>
       </div>
       <ul class="blog-tags">
@@ -52,6 +49,6 @@
       <label><input ng-model="post.featured" type="checkbox"> This is a <em>featured post</em></label>
     </div>
     <button class="btn btn-primary" ng-click="addNewPost()">Post!</button>
-    <button class="btn" ng-click="resetForm()">Reset</button>
+    <button class="btn btn-default" ng-click="resetForm()">Reset</button>
   </form>
 </div>
