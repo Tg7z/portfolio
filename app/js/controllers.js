@@ -174,7 +174,18 @@ angular.module('portfolio.controllers', [])
       };
 
       $scope.addNewPost = function() {
-        var refPosts = new Firebase(FBURL).child('/posts').push();
+        var postName = '';
+        // get date for use in post name
+        var postDate = new Date($scope.post.release);
+        var yyyy = postDate.getFullYear().toString();
+        var mm = (postDate.getMonth()+1).toString(); // getMonth() is zero-based
+        var dd  = postDate.getDate().toString();
+        // build post name yyyy-mm-dd-title
+        postName += (yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]) + '-');
+        console.log(postName);
+        postName += encodeURIComponent($scope.post.title.split(' ').join('-').toLowerCase());
+        console.log(postName);
+        var refPosts = new Firebase(FBURL).child('/posts/' + postName);
         // Get tags into array for incrementing counters
         var tags = $scope.post.tags;
         var allPromises = [];
