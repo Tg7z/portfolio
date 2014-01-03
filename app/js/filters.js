@@ -7,18 +7,43 @@ angular.module('portfolio.filters', [])
     // Filter out posts that aren't released
     return function(assets) {
       var now = new Date().getTime();
-      var released = {};
+      var released = [];
       angular.forEach(assets, function(value, key) {
         if (typeof value === 'function') {
-          // maintain $(firebase) functions
-          released[key] = value;
+          // skip
         } else if (now > parseInt(value.release, 10)) {
+          // maintain id for linking
+          value.id = key;
           // keep released posts
-          released[key] = value;
+          released.push(value);
         }
+      });
+      // sort most recent to least
+      released.sort(function(a, b){
+        a = parseInt(a.release);
+        b = parseInt(b.release);
+        return b - a;
       });
       return released;
     };
+  })
+
+  .filter('orderByDate', function(){
+   return function(input, date) {
+      if (!angular.isObject(input)) return input;
+
+      var array = [];
+      for(var objectKey in input) {
+          array.push(input[objectKey]);
+      }
+
+      array.sort(function(a, b){
+          a = parseInt(a[date]);
+          b = parseInt(b[date]);
+          return a - b;
+      });
+      return array;
+   }
   })
 
   .filter('searchTag', function(){

@@ -4,8 +4,8 @@
 <div class="blog-content">
   <h2>Blog items go here</h2>
   <ul>
-    <li ng-repeat="(id,post) in posts | releaseDate" class="list-item">
-      <a ng-href="#/posts/{{id}}" title="{{post.title}}">{{post.title}}</a>
+    <li ng-repeat="post in posts | releaseDate" class="list-item" ng-class="{featured: post.featured}">
+      <a ng-href="#/posts/{{post.id}}" title="{{post.title}}">{{post.title}}</a>
     </li>
   </ul>
 </div>
