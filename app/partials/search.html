@@ -4,9 +4,11 @@
 <div class="blog-content">
   <h2>Search Results</h2>
   <h4>Query: {{q.q}}</h4>
-  <ul>
-    <li ng-repeat="(id,post) in posts | releaseDate | searchQuery:q" class="list-item">
-      <a ng-href="#/posts/{{id}}" title="{{post.title}}">{{post.title}}</a>
+  <ul class="blog-posts">
+    <li ng-repeat="post in posts | releaseDate" class="blog-post" ng-class="{featured: post.featured}">
+      <div class="post-data">
+        <a ng-href="#/posts/{{post.id}}" title="{{post.title}}">{{post.title}}</a>
+      </div>
     </li>
   </ul>
 </div>

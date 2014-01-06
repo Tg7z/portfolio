@@ -2,10 +2,12 @@
 <div blog-sidebar></div>
 
 <div class="blog-content">
-  <h2>{{tag}}</h2>
-  <ul>
-    <li ng-repeat="(id,post) in posts | releaseDate | searchTag:tag" class="list-item">
-      <a ng-href="#/posts/{{id}}" title="{{post.title}}">{{post.title}}</a>
+  <h2>Posts Tagged: {{tag}}</h2>
+  <ul class="blog-posts">
+    <li ng-repeat="post in posts | releaseDate" class="blog-post" ng-class="{featured: post.featured}">
+      <div class="post-data" style="background-image: url('{{post.hero_img}}')">
+        <a ng-href="#/posts/{{post.id}}" title="{{post.title}}">{{post.title}}</a>
+      </div>
     </li>
   </ul>
 </div>

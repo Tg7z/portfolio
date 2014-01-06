@@ -1,0 +1,50 @@
+.blog-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-post {
+  display: block;
+  float: left;
+  position: relative;
+  width: 20%;
+
+  &:before {
+    content: "";
+    display: table;
+    margin-top: 75%; /* 4:3 aspect ratio */
+  }
+
+  &.featured {
+    width: 40%;
+  }
+
+  &:first-child {
+    width: 60%;
+  }
+}
+
+.post-data {
+    position: absolute;
+    top: 0;
+    bottom: 30px;
+    left: 0;
+    right: 32px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    h2 {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 0.4em 1em;
+
+      font-size: 16px;
+      background-color: @black;
+    }
+}

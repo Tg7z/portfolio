@@ -3323,7 +3323,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .blog-content {
   margin-top: 80px;
   margin-right: 280px;
-  padding: 20px 40px;
+  padding: 20px 0 20px 40px;
 }
 .blog-tags {
   list-style: none;
@@ -3376,6 +3376,49 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border: 0;
   padding: 0 10px 0 0;
 }
+.blog-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.blog-post {
+  display: inline-block;
+  position: relative;
+  width: 20%;
+}
+.blog-post:before {
+  content: "";
+  display: table;
+  margin-top: 75%;
+  /* 4:3 aspect ratio */
+}
+.blog-post.featured {
+  width: 40%;
+}
+.blog-post:first-child {
+  width: 60%;
+}
+.post-data {
+  position: absolute;
+  top: 0;
+  bottom: 30px;
+  left: 0;
+  right: 32px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.post-data h2 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.4em 1em;
+  font-size: 16px;
+  background-color: #000000;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -3417,4 +3460,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .affix {
   position: fixed;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
