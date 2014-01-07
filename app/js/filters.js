@@ -62,6 +62,24 @@ angular.module('portfolio.filters', [])
     };
   })
 
+  .filter('postTag', function(){
+    // Only display posts tags for post detail page
+    return function(tags, match) {
+      if (match) {
+        var results = [{}];
+        angular.forEach(tags, function(value, key) {
+          if (match.indexOf(key) >= 0) {
+            results[key] = value;
+          }
+        });
+        return results;
+      } else {
+        return tags;
+      }
+    };
+
+  })
+
   .filter('searchQuery', function(){
     // Filter out posts that aren't released
     return function(assets, query) {
@@ -75,13 +93,15 @@ angular.module('portfolio.filters', [])
           // Search rules
           var checkTag = function(q) {
             var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
-            if (tags.indexOf(q.toLowerCase()) >= 0) { results[key] = value; }
+            if (tags.indexOf(q) >= 0) { results[key] = value; }
           };
 
           if (query.q) {
-            var q = query.q;
+            var q = query.q.toLowerCase();
             // check data based on specificity of search
             if (!query.t) { checkTag(q); }
+            if (value.title.toLowerCase().indexOf(q) >= 0) { results[key] = value; }
+            if (value.content.toLowerCase().indexOf(q) >= 0) { results[key] = value; }
           }
           // search tags
           if (query.t) { checkTag(query.t); }

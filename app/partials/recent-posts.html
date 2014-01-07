@@ -1,0 +1,7 @@
+<ul class="recent-posts">
+  <li ng-repeat="post in recentPosts | releaseDate | limitTo:4" class="recent-post">
+    <a ng-href="#/posts/{{post.id}}" class="post-data" title="{{post.title}}" style="background-image: url('{{post.hero_img}}')">
+      <h2 class="post-title truncate">{{post.title}}</h2>
+    </a>
+  </li>
+</ul>
