@@ -28,6 +28,22 @@ angular.module('portfolio.filters', [])
     };
   })
 
+  .filter('tileSize', function(){
+    // Filter out posts that aren't released
+    return function(assets) {
+      angular.forEach(assets, function(value, i) {
+        if (i === 0 || value.featured) {
+          // first and featured items are always 2x2
+          assets[i].size = 2;
+        } else {
+          // otherwise 1x1
+          assets[i].size = 1;
+        }
+      });
+      return assets;
+    };
+  })
+
   .filter('searchTag', function(){
     // Filter out posts that aren't released
     return function(assets, tag) {

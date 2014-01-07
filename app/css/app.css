@@ -3376,27 +3376,15 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border: 0;
   padding: 0 10px 0 0;
 }
-.blog-posts {
+#blog-posts {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0;
+  position: relative;
 }
 .blog-post {
-  display: inline-block;
-  position: relative;
-  width: 20%;
-}
-.blog-post:before {
-  content: "";
-  display: table;
-  margin-top: 75%;
-  /* 4:3 aspect ratio */
-}
-.blog-post.featured {
-  width: 40%;
-}
-.blog-post:first-child {
-  width: 60%;
+  display: block;
+  position: absolute;
 }
 .post-data {
   position: absolute;
@@ -3418,6 +3406,20 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 0.4em 1em;
   font-size: 16px;
   background-color: #000000;
+}
+@media (max-width: 960px) {
+  .blog-post {
+    width: 50% !important;
+    float: left !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  .blog-post:first-child {
+    width: 100% !important;
+  }
 }
 .clearfix:before,
 .clearfix:after {

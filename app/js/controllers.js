@@ -52,6 +52,21 @@ angular.module('portfolio.controllers', [])
       $scope.posts = $firebase(refPosts);
   }])
 
+  .controller('TileGridCtrl',
+    ['$scope', '$window', function($scope, $window) {
+      $scope.rowHeight = 0;
+      $scope.gridfillOptions = { cols: 4, tile_ratio: '4:3', selector: 'blog-posts', tileSelector: 'blog-post' };
+      $scope.$parent.$on('ngRepeatFinished', function() {
+        gridfill.initialize($scope.gridfillOptions);
+      });
+      $window.onresize = function() {
+        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        if (width >= 960) {
+          gridfill.layoutGrid.bind(gridfill);
+        }
+      };
+  }])
+
   .controller('TagCloudCtrl',
     ['$scope', '$firebase', 'FBURL',
     function($scope, $firebase, FBURL) {

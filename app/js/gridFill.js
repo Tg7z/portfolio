@@ -38,76 +38,8 @@ Element.prototype.getElementWidth = function() {
   }
 };
 
-// http://stackoverflow.com/a/4139190/3063815
-Object.defineProperty(Object.prototype, "extend", {
-  enumerable: false,
-  value: function(from) {
-    var props = Object.getOwnPropertyNames(from);
-    var dest = this;
-    props.forEach(function(name) {
-      if (name in dest) {
-        var destination = Object.getOwnPropertyDescriptor(from, name);
-        Object.defineProperty(dest, name, destination);
-      }
-    });
-    return this;
-  }
-});
-
-// http://stackoverflow.com/a/728694/3063815
-function clone(obj) {
-    // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj) return obj;
-
-    // Handle Date
-    if (obj instanceof Date) {
-        var copy = new Date();
-        copy.setTime(obj.getTime());
-        return copy;
-    }
-
-    // Handle Array
-    if (obj instanceof Array) {
-        var copy = [];
-        for (var i = 0, len = obj.length; i < len; i++) {
-            copy[i] = clone(obj[i]);
-        }
-        return copy;
-    }
-
-    // Handle Object
-    if (obj instanceof Object) {
-        var copy = {};
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-        }
-        return copy;
-    }
-
-    throw new Error("Unable to copy obj! Its type isn't supported.");
-}
-
-var generateItem = function () {
-  var size = Math.floor(Math.sqrt(Math.random() * 5^2));
-  if (size === 0) { size = 1 }
-  return size;
-};
-var testData = [3];
-for (var i = 0; i < 24; i++) {
-  testData.push(generateItem());
-}
-console.log(testData);
-
 var gridfill = {
   initialize: function(options) {
-    options = options || {};
-    var defaults = {
-        cols: 5
-      , tile_ratio: 1
-      , selector: 'container'
-      , data: []
-    };
-    var options = clone(defaults).extend(options);
     this.options = options;
     // convert ratio to useable value
     if (typeof this.options.tile_ratio === 'string') {
@@ -116,6 +48,14 @@ var gridfill = {
       ratio[1] = parseInt(ratio[1], 10);
       var calcRatio = ratio[0] / ratio[1];
       this.options.tile_ratio = calcRatio;
+    }
+    this.element = document.getElementById(this.options.selector);
+    this.data = [];
+    var data = this.element.getElementsByTagName('*'), i;
+    for (i in data) {
+      if((' ' + data[i].className + ' ').indexOf(' ' + this.options.tileSelector + ' ') > -1) {
+        this.data.push(data[i]);
+      }
     }
     // array of false
     var arr = [];
@@ -127,7 +67,6 @@ var gridfill = {
        arr[i] = row;
     }
     this.grid = arr;
-    this.element = document.getElementById(this.options.selector);
     this.data_index = 0;
     this.index_offset = 0;
     this.populatedElements = {};
@@ -135,13 +74,16 @@ var gridfill = {
     this.positionalData(false, {
         col: 0
       , row: 0
-      , tile_size: this.tileSize()
     });
     // layout the grid
     this.createGrid();
   },
   tileSize: function() {
-    var size = this.options.data[this.data_index];
+    var size = this.data[this.data_index].dataset.gridSize;
+    var maxCols = this.options.cols;
+    if (size > maxCols) {
+      size = maxCols;
+    }
     return size;
   },
   positionalData: function(backfill, data) {
@@ -168,21 +110,22 @@ var gridfill = {
     }
   },
   createGrid: function() {
-    while (this.data_index < this.options.data.length) {
+    while (this.data_index < this.data.length) {
       //console.log('data_index: ' + this.data_index);
       //console.log('row: ' + this.row + ' col: ' + this.col);
       //this.consoleGrid();
       this.checkGrid();
-      this.placeTile();
+      this.setPositionData();
       this.updateMap();
       // get tile size before resetting data index as we need
       // the last placed tiles size to decide if we backfill
       var tile_size = this.tileSize();
       this.resetDataIndex();
-      if (tile_size > 1 && this.col > 0) {
+      var moreTiles = this.data_index < this.data.length;
+      if (tile_size > 1 && this.col > 0 && moreTiles) {
         this.doBackfill(tile_size - 1);
       }
-      if (this.options.data.length > 0) {
+      if (this.data.length > 0 && moreTiles) {
         this.updatePosition();
       }
     }
@@ -207,7 +150,7 @@ var gridfill = {
           // tile doesn't fit we will have to find one that does
           var itemFound = false;
           while (!itemFound) {
-            if (this.data_index < this.options.data.length) {
+            if (this.data_index < this.data.length) {
               // find next unplaced item
               this.data_index++;
               this.index_offset++;
@@ -223,7 +166,7 @@ var gridfill = {
               } else {
                 // find first unplaced item
                 var found = false;
-                for (var i = 0; i < this.options.data.length; i++) {
+                for (var i = 0; i < this.data.length; i++) {
                   if (!this.populatedElements[i]) {
                     this.data_index = i;
                     this.index_offset = 0;
@@ -233,7 +176,7 @@ var gridfill = {
                 }
                 if (!found) {
                   //console.log('theres no unplaced items');
-                  this.data_index = this.options.data.length;
+                  this.data_index = this.data.length;
                   return false;
                 }
                 this.row += 1;
@@ -266,33 +209,27 @@ var gridfill = {
     }
     return clear;
   },
-  placeTile: function(backfill) {
+  setPositionData: function(backfill) {
     var p_data = this.positionalData(backfill);
     var tile_size = this.tileSize();
     var tile_ratio = this.options.tile_ratio;
-    var tile_width = (100 / this.options.cols) * tile_size; // tile width in %
-    var tile_height = this.element.getElementWidth() / tile_ratio;
+    var col_width = 100 / this.options.cols;
+    var tile_width = col_width * tile_size; // tile width in %
+    var tile_left = p_data.col * col_width;
     var percentRatio = (1 / tile_ratio) * 100;
     // Create HTML element for tile
     var newTile = document.createElement('li');
-    newTile.setAttribute('data-grid-row', p_data.row);
-    newTile.setAttribute('data-grid-col', p_data.col);
-    newTile.setAttribute('data-grid-size', tile_size);
-    newTile.setAttribute('class', 'tile');
-    newTile.style.width = tile_width + '%';
-    // Create HTML element height Spacer
-    var heightSpacer = document.createElement('div');
-    heightSpacer.setAttribute('style', 'padding-top: ' + percentRatio + '%;');
-    // Create HTML element for inner data
-    var tileInner = document.createElement('div');
-    tileInner.setAttribute('class', 'tile-inner size' + tile_size);
-    // Create textNode for id
-    var index = document.createTextNode(this.data_index);
-    // Append element
-    tileInner.appendChild(index);
-    newTile.appendChild(heightSpacer);
-    newTile.appendChild(tileInner);
-    this.element.appendChild(newTile);
+    this.data[this.data_index].setAttribute('data-grid-row', p_data.row);
+    this.data[this.data_index].setAttribute('data-grid-col', p_data.col);
+    this.data[this.data_index].style.width = tile_width + '%';
+    this.data[this.data_index].style.left = tile_left + '%';
+    // set height spacer to create height based on ratio
+    var child = this.element.getElementsByTagName('*'), i;
+    for (i in child) {
+      if((' ' + child[i].className + ' ').indexOf(' ' + 'height-spacer' + ' ') > -1) {
+        child[i].setAttribute('style', 'padding-top:' + percentRatio + '%;')
+      }
+    }
     return this;
   },
   updateMap: function(backfill) {
@@ -313,14 +250,26 @@ var gridfill = {
     var elementCount = 0;
     var elems = this.element.getElementsByTagName('*'), i;
     for (i in elems) {
-      if((' ' + elems[i].className + ' ').indexOf(' ' + 'tile' + ' ') > -1) {
+      if((' ' + elems[i].className + ' ').indexOf(' ' + this.options.tileSelector + ' ') > -1) {
         elementCount++;
       }
     }
     this.populatedElements[this.data_index] = true;
-    this.data_index = elementCount - this.index_offset;
+    // find first unplaced tile
+    var found = false;
+    for (var i = 0; i < this.data.length; i++) {
+      if (!this.populatedElements[i]) {
+        this.data_index = i;
+        this.index_offset = 0;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      // all items are placed
+      this.data_index = this.data.length;
+    }
     //console.log('---- next data_index: ' + this.data_index);
-    this.index_offset = 0;
     return this;
   },
   updatePosition: function(backfill) {
@@ -388,7 +337,7 @@ var gridfill = {
     while (doFill) {
       var doFill = this.checkGrid(true);
       if (doFill) {
-        this.placeTile(true);
+        this.setPositionData(true);
         this.updateMap(true);
         this.resetDataIndex(); // backfill independent
         this.updatePosition(true);
@@ -399,18 +348,12 @@ var gridfill = {
     var parentElem = this.element;
     var elems = parentElem.getElementsByTagName('*'), i;
     for (i in elems) {
-      if((' ' + elems[i].className + ' ').indexOf(' ' + 'tile' + ' ') > -1) {
+      if((' ' + elems[i].className + ' ').indexOf(' ' + this.options.tileSelector + ' ') > -1) {
         var ele = elems[i];
-        var tile_size = ele.getAttribute('data-grid-size');
-        var tile_col = ele.getAttribute('data-grid-col');
         var tile_row = ele.getAttribute('data-grid-row');
-        var col_width = (100 / this.options.cols); // column width in %
         var row_height = (parentElem.getElementWidth() / this.options.cols) / this.options.tile_ratio;
-        var left_offset = col_width * tile_col;
         var top_offset = row_height * tile_row;
         // Position tiles
-        var currentStyle = ele.getAttribute('style');
-        ele.style.left = left_offset + '%';
         ele.style.top = top_offset + 'px';
       }
     }
@@ -454,5 +397,3 @@ var gridfill = {
     // 9556: ╔ ;   9552: ═ ;   9574: ╦ ;   9559: ╗ ;   9553: ║ ;   9568: ╠ ;   9580: ╬ ;   9571: ╣ ;   9562: ╚ ;   9577: ╩ ;   9565: ╝ ;
   }
 };
-gridfill.initialize({ cols: 5, tile_ratio: '4:3', selector: 'container', data: testData });
-window.onresize = gridfill.layoutGrid.bind(gridfill);

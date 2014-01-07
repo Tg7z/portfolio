@@ -2,8 +2,9 @@
 <div blog-sidebar></div>
 
 <div class="blog-content">
-  <ul class="blog-posts">
-    <li ng-repeat="post in posts | releaseDate" class="blog-post" ng-class="{featured: post.featured}">
+  <ul id="blog-posts" tile-grid>
+    <li ng-repeat="post in posts | releaseDate | tileSize" class="blog-post" data-grid-size="{{post.size}}" on-finish-render>
+      <div class="height-spacer"></div>
       <a ng-href="#/posts/{{post.id}}" class="post-data" title="{{post.title}}" style="background-image: url('{{post.hero_img}}')">
         <h2 class="post-title truncate">{{post.title}}</h2>
       </a>
