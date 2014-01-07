@@ -66,7 +66,7 @@ angular.module('portfolio.filters', [])
     // Only display posts tags for post detail page
     return function(tags, match) {
       if (match) {
-        var results = [{}];
+        var results = {};
         angular.forEach(tags, function(value, key) {
           if (match.indexOf(key) >= 0) {
             results[key] = value;
