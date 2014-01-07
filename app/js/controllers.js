@@ -19,11 +19,10 @@ angular.module('portfolio.controllers', [])
   }])
 
   .controller('BlogCtrl',
-    ['$scope', '$location', '$firebase', 'FBURL',
-    function($scope, $location, $firebase, FBURL) {
+    ['$scope', '$firebase', 'FBURL',
+    function($scope, $firebase, FBURL) {
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
-      $scope.q = $location.search();
   }])
 
   .controller('PostCtrl',
@@ -50,6 +49,12 @@ angular.module('portfolio.controllers', [])
 
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+  }])
+
+  .controller('RecentPostsCtrl',['$scope', '$firebase', 'FBURL',
+    function($scope, $firebase, FBURL) {
+      var refPosts = new Firebase(FBURL).child('/posts').limit(10);
+      $scope.recentPosts = $firebase(refPosts);
   }])
 
   .controller('TileGridCtrl',

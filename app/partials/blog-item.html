@@ -2,5 +2,20 @@
 <div blog-sidebar></div>
 
 <div class="blog-content blog-item">
-  <h2>{{data.title}}</h2>
+  <article class="post-content">
+    <h2>{{data.title}}</h2>
+    <div class="post-wrapper">
+      <div class="post-copy">
+        {{data.content}}
+        <h5>Tagged</h5>
+        <ul post-tags></ul>
+      </div>
+      <img class="hero-img" ng-src="{{data.hero_img}}" title="{{data.title}}">
+    </div>
+    <hr>
+  </article>
+  <div class="post-recent">
+    <h4>Recent Posts</h4>
+    <ul recent-posts></ul>
+  </div>
 </div>

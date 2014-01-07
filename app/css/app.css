@@ -3421,6 +3421,65 @@ textarea.input-group-sm > .input-group-btn > .btn {
     width: 100% !important;
   }
 }
+.post-content {
+  margin-right: 40px;
+}
+.post-wrapper:before,
+.post-wrapper:after {
+  content: " ";
+  display: table;
+}
+.post-wrapper:after {
+  clear: both;
+}
+.post-wrapper:before,
+.post-wrapper:after {
+  content: " ";
+  display: table;
+}
+.post-wrapper:after {
+  clear: both;
+}
+.post-copy {
+  float: left;
+}
+.hero-img {
+  float: right;
+  width: 50%;
+}
+.post-more:before,
+.post-more:after {
+  content: " ";
+  display: table;
+}
+.post-more:after {
+  clear: both;
+}
+.post-more:before,
+.post-more:after {
+  content: " ";
+  display: table;
+}
+.post-more:after {
+  clear: both;
+}
+.recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 8px 8px 0 0;
+  position: relative;
+}
+.recent-post {
+  width: 25%;
+  display: inline-block;
+  position: relative;
+}
+.recent-post:before {
+  content: "";
+  display: table;
+  margin-top: 75%;
+  /* 4:3 aspect ratio */
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";

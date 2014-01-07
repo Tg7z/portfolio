@@ -1,0 +1,39 @@
+.post-content {
+  margin-right: 40px;
+}
+
+.post-wrapper {
+  .clearfix();
+}
+
+.post-copy {
+  float:left;
+}
+
+.hero-img {
+  float: right;
+  width: 50%;
+}
+
+.post-more {
+  .clearfix();
+}
+
+.recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 8px 8px 0 0;
+  position: relative;
+}
+
+.recent-post {
+  width: 25%;
+  display: inline-block;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: table;
+    margin-top: 75%; /* 4:3 aspect ratio */
+  }
+}

@@ -65,7 +65,28 @@ angular.module('portfolio.directives', [])
       restrict: 'EA',
       templateUrl: 'partials/tag-cloud.html',
       controller: 'TagCloudCtrl',
-      replace: true
+      replace: true,
+      scope: true
+    };
+  })
+
+  .directive('postTags', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'partials/tag-cloud-post.html',
+      controller: 'TagCloudCtrl',
+      replace: true,
+      scope: true
+    };
+  })
+
+  .directive('recentPosts', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'partials/recent-posts.html',
+      controller: 'RecentPostsCtrl',
+      replace: true,
+      scope: true
     };
   })
 
