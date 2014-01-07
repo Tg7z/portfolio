@@ -10,7 +10,7 @@
       <input class="form-control" name="title" type="text" ng-model="post.title" />
     </div>
     <div class="form-group">
-      <label for="content">Content</label>
+      <label for="content">Content (HTML)</label>
       <textarea class="form-control" rows="5" name="content" ng-model="post.content"></textarea>
     </div>
     <div class="form-group">
@@ -42,8 +42,12 @@
       </ul>
     </div>
     <div class="form-group">
-      <label for="via">via</label>
-      <input class="form-control" name="via" type="text" ng-model="post.via" />
+      <label for="via">via label</label>
+      <input class="form-control" name="via" type="text" ng-model="post.via.label" />
+    </div>
+    <div class="form-group">
+      <label for="via">via link</label>
+      <input class="form-control" name="via" type="text" ng-model="post.via.link" />
     </div>
     <div class="checkbox">
       <label><input ng-model="post.featured" type="checkbox"> This is a <em>featured post</em></label>
