@@ -28,6 +28,27 @@ angular.module('portfolio.filters', [])
     };
   })
 
+  .filter('excludeAsset', function() {
+    // Exclude currently displayed asset
+    // can pass in string or array of strings
+    return function(assets, exclude) {
+      angular.forEach(assets, function(value, key) {
+        if (typeof exclude === 'string') {
+          if (key === exclude) {
+            delete assets[exclude];
+          }
+        } else {
+          var excludeKey = exclude.indexOf(key);
+          if (~excludeKey) {
+            var deleteKey = exclude[excludeKey];
+            delete assets[deleteKey];
+          }
+        }
+      });
+      return assets;
+    };
+  })
+
   .filter('tileSize', function(){
     // Filter out posts that aren't released
     return function(assets) {
