@@ -110,22 +110,52 @@ angular.module('portfolio.filters', [])
           // maintain $(firebase) functions
           results[key] = value;
         } else {
-          var searchScore = 0;
           // Search rules
           var checkTag = function(q) {
-            var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
-            if (tags.indexOf(q) >= 0) { results[key] = value; }
+            // search only if data exists
+            if (value.tags) {
+              var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
+              if (tags.indexOf(q) >= 0) { results[key] = value; }
+            }
+          };
+
+          var checkVia = function(q) {
+            // search only if data exists
+            if (value.via){
+              if (value.via.label) {
+                var viaLabel = value.via.label.toLowerCase();
+                if (viaLabel.indexOf(q) >= 0) { results[key] = value; }
+              }
+              if (value.via.link) {
+                var viaLink = value.via.link.toLowerCase();
+                if (viaLink.indexOf(q) >= 0) { results[key] = value; }
+              }
+            }
           };
 
           if (query.q) {
-            var q = query.q.toLowerCase();
+            var queries = query.q.split(' ').map(function(elem) { return elem.toLowerCase(); });
+            var titleWords = value.title.split(' ').map(function(elem) { return elem.toLowerCase(); });
+            var contentWords = value.content.split(' ').map(function(elem) { return elem.toLowerCase(); });
             // check data based on specificity of search
-            if (!query.t) { checkTag(q); }
-            if (value.title.toLowerCase().indexOf(q) >= 0) { results[key] = value; }
-            if (value.content.toLowerCase().indexOf(q) >= 0) { results[key] = value; }
+            if (!query.t) { angular.forEach(queries, function(q, i){ checkTag(q); }); }
+            if (!query.v) { angular.forEach(queries, function(q, i){ checkVia(q); }); }
+            // search individual words
+            angular.forEach(titleWords, function(word, i){
+              angular.forEach(queries, function(q, i){
+                if (word.indexOf(q) >= 0) { results[key] = value; }
+              });
+            });
+            angular.forEach(titleWords, function(word, i){
+              angular.forEach(queries, function(q, i){
+                if (word.indexOf(q) >= 0) { results[key] = value; }
+              });
+            });
           }
           // search tags
-          if (query.t) { checkTag(query.t); }
+          if (query.t) { checkTag(query.t.toLowerCase()); }
+          // search via
+          if (query.v) { checkVia(query.v.toLowerCase()); }
         }
       });
       return results;
