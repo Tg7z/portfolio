@@ -49,10 +49,7 @@ angular.module('portfolio.filters', [])
     return function(assets, tag) {
       var results = {};
       angular.forEach(assets, function(value, key) {
-        if (typeof value === 'function') {
-          // maintain $(firebase) functions
-          results[key] = value;
-        } else {
+        if (typeof value !== 'function') {
           // filter tags
           var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
 
