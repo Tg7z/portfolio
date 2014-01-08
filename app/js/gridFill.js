@@ -114,19 +114,20 @@ var gridfill = {
       //console.log('data_index: ' + this.data_index);
       //console.log('row: ' + this.row + ' col: ' + this.col);
       //this.consoleGrid();
-      this.checkGrid();
-      this.setPositionData();
-      this.updateMap();
-      // get tile size before resetting data index as we need
-      // the last placed tiles size to decide if we backfill
-      var tile_size = this.tileSize();
-      this.resetDataIndex();
-      var moreTiles = this.data_index < this.data.length;
-      if (tile_size > 1 && this.col > 0 && moreTiles) {
-        this.doBackfill(tile_size - 1);
-      }
-      if (this.data.length > 0 && moreTiles) {
-        this.updatePosition();
+      if (this.checkGrid()) {
+        this.setPositionData();
+        this.updateMap();
+        // get tile size before resetting data index as we need
+        // the last placed tiles size to decide if we backfill
+        var tile_size = this.tileSize();
+        this.resetDataIndex();
+        var moreTiles = this.data_index < this.data.length;
+        if (tile_size > 1 && this.col > 0 && moreTiles) {
+          this.doBackfill(tile_size - 1);
+        }
+        if (this.data.length > 0 && moreTiles) {
+          this.updatePosition();
+        }
       }
     }
     this.layoutGrid();
@@ -140,51 +141,59 @@ var gridfill = {
     }
     var place = false;
     while (!place) {
-      var tile_size = this.tileSize();
-      if (tile_size === 1) {
-        place = true;
-      } else {
-        if (this.checkSurround(backfill)) {
+        var tile_size = this.tileSize();
+        if (tile_size === 1) {
           place = true;
         } else {
-          // tile doesn't fit we will have to find one that does
-          var itemFound = false;
-          while (!itemFound) {
-            if (this.data_index < this.data.length) {
-              // find next unplaced item
-              this.data_index++;
-              this.index_offset++;
-              var state = this.populatedElements[this.data_index];
-              if (!state) {
-                //console.log('tile dont fit trying index:' + this.data_index);
-                itemFound = true;
-              }
-            } else {
-              //console.log('nothing fits');
-              if (backfill) {
-                return false;
-              } else {
-                // find first unplaced item
-                var found = false;
-                for (var i = 0; i < this.data.length; i++) {
-                  if (!this.populatedElements[i]) {
-                    this.data_index = i;
-                    this.index_offset = 0;
-                    found = true;
-                    break;
-                  }
+          if (this.checkSurround(backfill)) {
+            place = true;
+          } else {
+            // tile doesn't fit we will have to find one that does
+            var itemFound = false;
+            while (!itemFound) {
+              if (this.data_index < this.data.length - 1) {
+                // find next unplaced item
+                this.data_index++;
+                this.index_offset++;
+                var state = this.populatedElements[this.data_index];
+                if (!state) {
+                  //console.log('tile dont fit trying index:' + this.data_index);
+                  itemFound = true;
                 }
-                if (!found) {
-                  //console.log('theres no unplaced items');
-                  this.data_index = this.data.length;
+              } else {
+                //console.log('nothing fits');
+                if (backfill) {
+                  return false;
+                } else {
+                  // find first unplaced item
+                  var found = false;
+                  for (var i = 0; i < this.data.length; i++) {
+                    if (!this.populatedElements[i]) {
+                      this.data_index = i;
+                      this.index_offset = 0;
+                      found = true;
+                      //console.log('found unplaced item at index ' + this.data_index);
+                      break;
+                    }
+                  }
+                  if (!found) {
+                    //console.log('theres no unplaced items');
+                    this.data_index = this.data.length;
+                    return false;
+                  }
+                  // increment col or set new row
+                  if (this.col < this.options.cols) {
+                    this.col += 1;
+                  } else {
+                    this.col = 0;
+                    this.row += 1;
+                  }
                   return false;
                 }
-                this.row += 1;
               }
             }
           }
         }
-      }
     }
     return this;
   },
@@ -210,24 +219,27 @@ var gridfill = {
     return clear;
   },
   setPositionData: function(backfill) {
-    var p_data = this.positionalData(backfill);
-    var tile_size = this.tileSize();
-    var tile_ratio = this.options.tile_ratio;
-    var col_width = 100 / this.options.cols;
-    var tile_width = col_width * tile_size; // tile width in %
-    var tile_left = p_data.col * col_width;
-    var percentRatio = (1 / tile_ratio) * 100;
-    // Create HTML element for tile
-    var newTile = document.createElement('li');
-    this.data[this.data_index].setAttribute('data-grid-row', p_data.row);
-    this.data[this.data_index].setAttribute('data-grid-col', p_data.col);
-    this.data[this.data_index].style.width = tile_width + '%';
-    this.data[this.data_index].style.left = tile_left + '%';
-    // set height spacer to create height based on ratio
-    var child = this.element.getElementsByTagName('*'), i;
-    for (i in child) {
-      if((' ' + child[i].className + ' ').indexOf(' ' + 'height-spacer' + ' ') > -1) {
-        child[i].setAttribute('style', 'padding-top:' + percentRatio + '%;')
+    // only place if valid asset
+    if (this.data_index < this.data.length) {
+      var p_data = this.positionalData(backfill);
+      var tile_size = this.tileSize();
+      var tile_ratio = this.options.tile_ratio;
+      var col_width = 100 / this.options.cols;
+      var tile_width = col_width * tile_size; // tile width in %
+      var tile_left = p_data.col * col_width;
+      var percentRatio = (1 / tile_ratio) * 100;
+      // Create HTML element for tile
+      var newTile = document.createElement('li');
+      this.data[this.data_index].setAttribute('data-grid-row', p_data.row);
+      this.data[this.data_index].setAttribute('data-grid-col', p_data.col);
+      this.data[this.data_index].style.width = tile_width + '%';
+      this.data[this.data_index].style.left = tile_left + '%';
+      // set height spacer to create height based on ratio
+      var child = this.element.getElementsByTagName('*'), i;
+      for (i in child) {
+        if((' ' + child[i].className + ' ').indexOf(' ' + 'height-spacer' + ' ') > -1) {
+          child[i].setAttribute('style', 'padding-top:' + percentRatio + '%;')
+        }
       }
     }
     return this;
