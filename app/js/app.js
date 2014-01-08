@@ -6,7 +6,7 @@ var appVersion  = '0.1',
 // Declare app level module which depends on filters, and services
 angular.module('portfolioApp',
     ['portfolio.filters', 'portfolio.services', 'portfolio.directives',
-    'portfolio.controllers', 'ngRoute', 'firebase', 'ui.bootstrap']
+    'portfolio.controllers', 'ngRoute', 'firebase', 'ui.bootstrap', 'ngSanitize']
   )
 
   // configure views; note the authRequired parameter for authenticated pages

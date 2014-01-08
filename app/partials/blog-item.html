@@ -7,12 +7,12 @@
     <h5><span class="post-date">Posted: {{data.release | date:'EEEE, MMMM d, y h:mm a'}}</span></h5>
     <div class="post-wrapper">
       <div class="post-copy">
-        {{data.content}}
+        <div ng-bind-html="htmlUnsafe()"></div>
         <p ng-if="data.via">via: <a ng-href="{{data.via.link}}" title="Originally posted at {{data.via.label}}">{{data.via.label}}</a></p>
         <h5>Tagged</h5>
         <ul post-tags></ul>
       </div>
-      <img class="hero-img" ng-src="{{data.hero_img}}" title="{{data.title}}">
+
     </div>
     <hr>
   </article>

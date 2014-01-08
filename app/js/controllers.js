@@ -26,11 +26,14 @@ angular.module('portfolio.controllers', [])
   }])
 
   .controller('PostCtrl',
-    ['$scope', '$routeParams', '$firebase', 'FBURL',
-    function($scope, $routeParams, $firebase, FBURL) {
+    ['$scope', '$sce', '$routeParams', '$firebase', 'FBURL',
+    function($scope, $sce, $routeParams, $firebase, FBURL) {
       $scope.postId = $routeParams.id;
       var refPost = new Firebase(FBURL).child('/posts/' + $scope.postId);
       $scope.data = $firebase(refPost);
+      $scope.htmlUnsafe = function() {
+        return $sce.trustAsHtml($scope.data.content);
+      };
   }])
 
   .controller('TagCtrl',
