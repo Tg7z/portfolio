@@ -63,7 +63,7 @@ angular.module('portfolio.controllers', [])
   .controller('TileGridCtrl',
     ['$scope', '$window', function($scope, $window) {
       $scope.rowHeight = 0;
-      $scope.gridfillOptions = { cols: 4, tile_ratio: '4:3', selector: 'blog-posts', tileSelector: 'blog-post' };
+      $scope.gridfillOptions = { cols: 3, tile_ratio: '4:3', selector: 'blog-posts', tileSelector: 'blog-post' };
       $scope.$parent.$on('ngRepeatFinished', function() {
         gridfill.initialize($scope.gridfillOptions);
       });
