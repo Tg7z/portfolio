@@ -28,8 +28,8 @@ angular.module('portfolio.controllers', [])
   .controller('PostCtrl',
     ['$scope', '$routeParams', '$firebase', 'FBURL',
     function($scope, $routeParams, $firebase, FBURL) {
-      $scope.assetId = $routeParams.id;
-      var refPost = new Firebase(FBURL).child('/posts/' + $scope.assetId);
+      $scope.postId = $routeParams.id;
+      var refPost = new Firebase(FBURL).child('/posts/' + $scope.postId);
       $scope.data = $firebase(refPost);
   }])
 
@@ -103,14 +103,37 @@ angular.module('portfolio.controllers', [])
       };
   }])
 
-  .controller('AddCtrl',
-    ['$scope', '$q', '$firebase', 'FBURL',
-    function($scope, $q, $firebase, FBURL) {
+  .controller('AddEditCtrl',
+    ['$scope', '$q', '$routeParams', '$firebase', 'FBURL',
+    function($scope, $q, $routeParams, $firebase, FBURL) {
       var init = function init() {
         var refTags = new Firebase(FBURL).child('/tags');
 
-        // Set default form values
-        $scope.master = { author: "Tim Geurts", tags: [] };
+        $scope.editId = $routeParams.id;
+        if ($scope.editId) {
+          // current data is the default
+          $scope.pageHeading = 'Edit asset: ';
+          var refPost = new Firebase(FBURL).child('/posts/' + $scope.editId);
+          $scope.master = $firebase(refPost);
+          // set data in form when its loaded from firebase
+          $scope.master.$on('change', function() {
+            $scope.pageHeading = 'Edit asset: ' + $scope.master.title;
+            // remove any AngularFire function
+            angular.forEach($scope.master, function(value, key){
+              if (typeof value === 'function') {
+                delete $scope.master[key];
+              }
+            });
+            if (!$scope.master.tags) {
+              $scope.master.tags = [];
+            }
+            $scope.resetForm();
+          });
+        } else {
+          $scope.pageHeading = 'Add Asset';
+          // Set default form values
+          $scope.master = { author: "Tim Geurts", tags: [] };
+        }
 
         // Default tag list
         $scope.tagList = ["Portfolio", "JavaScript", "AngularJS", "AngularFire", "Firebase", "HTML", "CSS", "App"];
@@ -186,35 +209,88 @@ angular.module('portfolio.controllers', [])
         $scope.release_date = now;
         $scope.release_time = now;
         $scope.master.release = now.getTime();
-      }
+      };
 
       $scope.resetForm = function() {
-        $scope.resetRelease();
+        if ($scope.editId) {
+          var release;
+          // populate minutes and date fields
+          if ($scope.master.release) {
+            release = new Date($scope.master.release);
+          } else {
+            release = new Date();
+          }
+          $scope.release_time = release;
+          $scope.release_date = release;
+          // update autocomplete field
+          var masterTags = $scope.master.tags;
+          angular.forEach(masterTags, function(value, i){
+            var position = $scope.tagList.indexOf(value);
+            if ( ~position ) {
+              $scope.tagList.splice(position, 1);
+            }
+          });
+        } else {
+          // only reset release if creating new post
+          $scope.resetRelease();
+        }
         $scope.post = angular.copy($scope.master);
       };
 
-      $scope.addNewPost = function() {
-        var postName = '';
-        // get date for use in post name
-        var postDate = new Date($scope.post.release);
-        var yyyy = postDate.getFullYear().toString();
-        var mm = (postDate.getMonth()+1).toString(); // getMonth() is zero-based
-        var dd  = postDate.getDate().toString();
-        // build post name yyyy-mm-dd-title
-        postName += (yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]) + '-');
-        console.log(postName);
-        postName += encodeURIComponent($scope.post.title.split(' ').join('-').toLowerCase());
-        console.log(postName);
-        var refPosts = new Firebase(FBURL).child('/posts/' + postName);
+      $scope.savePost = function() {
+        var refPosts;
+        if ($scope.editId) {
+          // edit post so use known FBURL
+          refPosts = new Firebase(FBURL).child('/posts/' + $scope.editId);
+        } else {
+          // new post so build post name
+          var postName = '';
+          // get date for use in post name
+          var postDate = new Date($scope.post.release);
+          var yyyy = postDate.getFullYear().toString();
+          var mm = (postDate.getMonth()+1).toString(); // getMonth() is zero-based
+          var dd  = postDate.getDate().toString();
+          // build post name yyyy-mm-dd-title
+          postName += (yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]) + '-');
+          postName += encodeURIComponent($scope.post.title.split(' ').join('-').toLowerCase());
+          refPosts = new Firebase(FBURL).child('/posts/' + postName);
+        }
         // Get tags into array for incrementing counters
-        var tags = $scope.post.tags;
+        var incrementTags = null;
+        var decrementTags = null;
+        if ($scope.editId) {
+          // when editing we only want to increment tags that didm't already exist
+          // and decrement and removed tags
+          var tags = $scope.post.tags.slice(0);
+          var masterTags = $scope.master.tags.slice(0);
+          angular.forEach(masterTags, function(value, i){
+            var match = tags.indexOf(value);
+            // if both arrays have the tag remover from both
+            if ( ~match ) {
+              delete tags[match];
+              delete masterTags[i];
+            }
+            // anything left in tags is a new tag
+            incrementTags = tags;
+            // anything left in masterTags is a tag that has been removed
+            decrementTags = masterTags;
+          });
+        } else {
+          incrementTags = $scope.post.tags;
+        }
         var allPromises = [];
-        // Iterate through tags and set promises for transactions to increment tag count
-        angular.forEach(tags, function(value, index){
+
+        // increment/decrement based on passed values
+        var updateTags = function(value, index, increment) {
           var dfd = $q.defer();
           var refTag = new Firebase(FBURL).child('/tags/' + value);
           refTag.transaction( function (current_value) {
-            return current_value + 1;
+            if (increment) {
+              return current_value + 1;
+            } else {
+              return current_value - 1;
+            }
+
           }, function(error, committed, snapshot) {
             if (committed) {
               dfd.resolve( snapshot );
@@ -223,7 +299,19 @@ angular.module('portfolio.controllers', [])
             }
           });
           allPromises.push( dfd.promise );
-        });
+        };
+        if (incrementTags) {
+          // Iterate through tags and set promises for transactions to increment tag count
+          angular.forEach(incrementTags, function(value, index){
+            updateTags(value, index, true);
+          });
+        }
+        if (decrementTags) {
+          // Iterate through tags and set promises for transactions to decrement tag count
+          angular.forEach(decrementTags, function(value, index){
+            updateTags(value, index, false);
+          });
+        }
 
         // Add promise for setting the post data
         var dfd = $q.defer();
@@ -238,6 +326,7 @@ angular.module('portfolio.controllers', [])
 
         $q.all( allPromises ).then(
           function(){
+            alert('Post saved successfully');
             $scope.resetForm(); // or redirect to post
           },
           function(error){

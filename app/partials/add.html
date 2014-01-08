@@ -2,7 +2,7 @@
 <div blog-sidebar></div>
 
 <div class="blog-content add-post">
-  <h2>Add Post</h2>
+  <h2>{{pageHeading}}</h2>
   <hr />
   <form name="form-post" role="form">
     <div class="form-group">
@@ -52,7 +52,7 @@
     <div class="checkbox">
       <label><input ng-model="post.featured" type="checkbox"> This is a <em>featured post</em></label>
     </div>
-    <button class="btn btn-primary" ng-click="addNewPost()">Post!</button>
+    <button class="btn btn-primary" ng-click="savePost()">Post!</button>
     <button class="btn btn-default" ng-click="resetForm()">Reset</button>
   </form>
 </div>

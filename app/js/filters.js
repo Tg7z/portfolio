@@ -5,10 +5,10 @@
 angular.module('portfolio.filters', [])
   .filter('releaseDate', function(){
     // Filter out posts that aren't released
-    return function(assets) {
+    return function(posts) {
       var now = new Date().getTime();
       var released = [];
-      angular.forEach(assets, function(value, key) {
+      angular.forEach(posts, function(value, key) {
         if (typeof value === 'function') {
           // skip
         } else if (now > parseInt(value.release, 10)) {
@@ -28,48 +28,50 @@ angular.module('portfolio.filters', [])
     };
   })
 
-  .filter('excludeAsset', function() {
-    // Exclude currently displayed asset
+  .filter('excludePost', function() {
+    // Exclude currently displayed post
     // can pass in string or array of strings
-    return function(assets, exclude) {
-      angular.forEach(assets, function(value, key) {
-        if (typeof exclude === 'string') {
-          if (key === exclude) {
-            delete assets[exclude];
+    return function(posts, exclude) {
+      if (exclude) {
+        angular.forEach(posts, function(value, key) {
+          if (typeof exclude === 'string') {
+            if (key === exclude) {
+              delete posts[exclude];
+            }
+          } else {
+            var excludeKey = exclude.indexOf(key);
+            if (~excludeKey) {
+              var deleteKey = exclude[excludeKey];
+              delete posts[deleteKey];
+            }
           }
-        } else {
-          var excludeKey = exclude.indexOf(key);
-          if (~excludeKey) {
-            var deleteKey = exclude[excludeKey];
-            delete assets[deleteKey];
-          }
-        }
-      });
-      return assets;
+        });
+      }
+      return posts;
     };
   })
 
   .filter('tileSize', function(){
     // Filter out posts that aren't released
-    return function(assets) {
-      angular.forEach(assets, function(value, i) {
+    return function(posts) {
+      angular.forEach(posts, function(value, i) {
         if (i === 0 || value.featured) {
           // first and featured items are always 2x2
-          assets[i].size = 2;
+          posts[i].size = 2;
         } else {
           // otherwise 1x1
-          assets[i].size = 1;
+          posts[i].size = 1;
         }
       });
-      return assets;
+      return posts;
     };
   })
 
   .filter('searchTag', function(){
     // Filter out posts that aren't released
-    return function(assets, tag) {
+    return function(posts, tag) {
       var results = {};
-      angular.forEach(assets, function(value, key) {
+      angular.forEach(posts, function(value, key) {
         if (typeof value !== 'function') {
           // filter tags
           var tags = value.tags.map(function(elem) { return elem.toLowerCase(); });
@@ -103,9 +105,9 @@ angular.module('portfolio.filters', [])
 
   .filter('searchQuery', function(){
     // Filter out posts that aren't released
-    return function(assets, query) {
+    return function(posts, query) {
       var results = {};
-      angular.forEach(assets, function(value, key) {
+      angular.forEach(posts, function(value, key) {
         if (typeof value === 'function') {
           // maintain $(firebase) functions
           results[key] = value;

@@ -23,6 +23,12 @@ angular.module('portfolioApp',
       controller: 'PostCtrl'
     })
 
+    .when('/posts/:id/edit', {
+      templateUrl: 'partials/add.html',
+      controller: 'AddEditCtrl',
+      authRequired: true
+    })
+
     .when('/tags/:tag', {
       templateUrl: 'partials/blog-tag.html',
       controller: 'TagCtrl'
@@ -48,7 +54,7 @@ angular.module('portfolioApp',
 
     .when('/add', {
       templateUrl: 'partials/add.html',
-      controller: 'AddCtrl',
+      controller: 'AddEditCtrl',
       authRequired: true
     })
 

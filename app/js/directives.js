@@ -65,7 +65,8 @@ angular.module('portfolio.directives', [])
       restrict: 'EA',
       templateUrl: 'partials/tag-cloud.html',
       controller: 'TagCloudCtrl',
-      replace: true
+      replace: true,
+      scope: true
     };
   })
 
