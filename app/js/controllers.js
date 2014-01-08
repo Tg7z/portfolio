@@ -70,7 +70,7 @@ angular.module('portfolio.controllers', [])
       $window.onresize = function() {
         var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         if (width >= 960) {
-          gridfill.layoutGrid.bind(gridfill);
+          gridfill.layoutGrid();
         }
       };
   }])
