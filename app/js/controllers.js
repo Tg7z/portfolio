@@ -255,7 +255,7 @@ angular.module('portfolio.controllers', [])
           var dd  = postDate.getDate().toString();
           // build post name yyyy-mm-dd-title
           postName += (yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]) + '-');
-          postName += encodeURIComponent($scope.post.title.split(' ').join('-').toLowerCase());
+          postName += encodeURIComponent($scope.post.title.split(' ').join('-').split('.').join('-').toLowerCase());
           refPosts = new Firebase(FBURL).child('/posts/' + postName);
         }
         // Get tags into array for incrementing counters
@@ -335,7 +335,7 @@ angular.module('portfolio.controllers', [])
             } else {
               postId = postName;
             }
-            $location.path('/posts/');
+            $location.path('/posts/' + postId);
           },
           function(error){
             console.log(error);
