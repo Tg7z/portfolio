@@ -2425,8 +2425,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   left: 0;
   right: 32px;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  background-size: contain;
+  background-position: center bottom;
+  background-color: #ffffff;
 }
 .post-data h2 {
   display: block;
@@ -2438,6 +2439,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 0.4em 1em;
   font-size: 16px;
   background-color: #000000;
+}
+.post-data.img-full-bleed {
+  background-size: contain;
+  background-position: center center;
 }
 @media (max-width: 960px) {
   .blog-post {
