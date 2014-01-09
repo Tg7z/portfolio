@@ -107,8 +107,8 @@ angular.module('portfolio.controllers', [])
   }])
 
   .controller('AddEditCtrl',
-    ['$scope', '$q', '$routeParams', '$firebase', 'FBURL',
-    function($scope, $q, $routeParams, $firebase, FBURL) {
+    ['$scope', '$q', '$routeParams', '$location', '$firebase', 'FBURL',
+    function($scope, $q, $routeParams, $location, $firebase, FBURL) {
       var init = function init() {
         var refTags = new Firebase(FBURL).child('/tags');
 
@@ -242,12 +242,12 @@ angular.module('portfolio.controllers', [])
 
       $scope.savePost = function() {
         var refPosts;
+        // new post so build post name
+        var postName = '';
         if ($scope.editId) {
           // edit post so use known FBURL
           refPosts = new Firebase(FBURL).child('/posts/' + $scope.editId);
         } else {
-          // new post so build post name
-          var postName = '';
           // get date for use in post name
           var postDate = new Date($scope.post.release);
           var yyyy = postDate.getFullYear().toString();
@@ -329,8 +329,13 @@ angular.module('portfolio.controllers', [])
 
         $q.all( allPromises ).then(
           function(){
-            alert('Post saved successfully');
-            $scope.resetForm(); // or redirect to post
+            var postId;
+            if ($scope.editId) {
+              postId = $scope.editId;
+            } else {
+              postId = postName;
+            }
+            $location.path('/posts/');
           },
           function(error){
             console.log(error);
