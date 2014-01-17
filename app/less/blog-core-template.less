@@ -10,7 +10,10 @@
   background-color: @header-bg;
   box-shadow: 0 -8px 26px 4px @header-fg;
 
-  h1 { color: @header-fg; }
+  h1 {
+    color: @header-fg;
+    margin-right:280px;
+  }
   &:before, &:after {
     content: '';
     position: absolute;
@@ -28,6 +31,13 @@
   }
 }
 
+.header-search {
+  position: absolute;
+  top: 22px;
+  right: 0;
+  width: 240px;
+}
+
 .sidebar {
   position: absolute;
 
@@ -41,8 +51,8 @@
     display: block;
     position: absolute;
 
-    top: 0;
-    bottom: 0;
+    top: 30px;
+    bottom: 30px;
     left: 0;
     width: 0px;
 
@@ -93,6 +103,10 @@
 
   [class|="sidebar"] {
     margin-bottom: 30px;
+  }
+
+  .sidebar-tags {
+    margin-bottom: 50px;
   }
 }
 
