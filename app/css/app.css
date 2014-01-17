@@ -1774,6 +1774,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .sidebar .sidebar-tags {
   margin-bottom: 50px;
 }
+.social-links {
+  margin-top: 10px;
+}
+.social-links a {
+  margin-right: 6px;
+}
 .sidebar-profile-img {
   margin-bottom: 12px;
 }
