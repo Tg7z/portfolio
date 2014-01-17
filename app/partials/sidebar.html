@@ -1,31 +1,18 @@
 <div class="sidebar">
   <div class="sidebar-profile">
-    <img class="img-responsive sidebar-profile-img" ng-src="{{bio.profile_image}}?s=200" alt="Photo of {{bio.name}}">
     <h5>The Author</h5>
+    <img class="img-responsive sidebar-profile-img" ng-src="{{bio.profile_image}}?s=200" alt="Photo of {{bio.name}}">
     <h4>{{bio.name}}</h4>
-    <p>Excited by the challenge of emerging technologies and the ever changing ways we interact with the web and often frustrated by counter-intuitive user experiences. This blog chronicles emerging web technologies and shining examples of user experience on the web.</p>
-    <hr class="thin">
-    <p>
-      <a href="#/tags/Portfolio" title="View my portfolio">Portfolio</a><br>
-      <a href="#/bio" title="More about me">More about me</a><br>
-      <a href="#/cv" title="Read my Curriculum Vitae, I might be right for you">Curriculum Vitae</a>
-    </p>
-    <p>
-      <a ng-href="mailto:{{bio.email}}" title="Please email me with any queries">{{bio.email}}</a><br>
-      <a ng-href="tel:{{bio.phone | nospace}}">{{bio.phone}}</a><br>
-      <a ng-href="{{bio.linkedin}}" title="Visit my LinkedIn profile">li</a> <a ng-href="{{bio.git}}" title="Find me on github">gh</a> <a ng-href="{{bio.twitter}}" title="Follow me on Twitter">tw</a>
-    </p>
-  </div>
-  <div class="sidebar-search">
-    <h5>Search</h5>
-    <form role="search" name="search">
-      <div class="input-group">
-        <input type="text" class="form-control" name="query" ng-model="query">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="keywordSearch()">Go!</button>
-        </span>
-      </div>
-    </form>
+    <ul class="list-unstyled">
+      <li><a href="#/tags/Portfolio" title="View my portfolio">Portfolio</a></li>
+      <li><a href="#/bio" title="More about me">More about me</a></li>
+      <li><a href="#/cv" title="Read my Curriculum Vitae, I might be right for you">Curriculum Vitae</a></li>
+    </ul>
+    <ul class="list-unstyled">
+      <li><a ng-href="mailto:{{bio.email}}" title="Please email me with any queries">{{bio.email}}</a></li>
+      <li><a ng-href="tel:{{bio.phone | nospace}}">{{bio.phone}}</a></li>
+      <li><a ng-href="{{bio.linkedin}}" title="Visit my LinkedIn profile">li</a> <a ng-href="{{bio.git}}" title="Find me on github">gh</a> <a ng-href="{{bio.twitter}}" title="Follow me on Twitter">tw</a></li>
+    </ul>
   </div>
   <div class="sidebar-tags">
     <h5>Tags</h5>

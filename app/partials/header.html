@@ -1,3 +1,14 @@
 <header class="blog-header">
-  <h1>autodidaktos</h3>
+  <h1>autodidaktos</h1>
+  <div class="header-search">
+    <form role="search" name="search">
+      <label for="query" class="sr-only">Search</label>
+      <div class="input-group">
+        <input type="text" class="form-control" name="query" ng-model="query" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="keywordSearch()">Go!</button>
+        </span>
+      </div>
+    </form>
+  </div>
 </header>

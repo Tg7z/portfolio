@@ -46,6 +46,8 @@ angular.module('portfolio.directives', [])
     return {
       restrict: 'EA',
       templateUrl: 'partials/header.html',
+      controller: 'HeaderCtrl',
+      scope: true,
       replace: true
     };
   })
@@ -54,8 +56,6 @@ angular.module('portfolio.directives', [])
     return {
       restrict: 'EA',
       templateUrl: 'partials/sidebar.html',
-      controller: 'SidebarCtrl',
-      scope: true,
       replace: true
     };
   })

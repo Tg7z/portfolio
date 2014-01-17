@@ -82,7 +82,7 @@ angular.module('portfolio.controllers', [])
       $scope.tagData = $firebase(refTags);
   }])
 
-  .controller('SidebarCtrl',
+  .controller('HeaderCtrl',
     ['$scope', '$location', function($scope, $location) {
       $scope.query = $location.search().q;
       $scope.keywordSearch = function() {
