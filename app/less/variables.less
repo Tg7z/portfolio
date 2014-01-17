@@ -22,44 +22,46 @@
 // -------------------------
 
 // Mystery Machine http://www.colourlovers.com/palette/940086/mystery_machine?widths=1
-@color1:                #554236; //Dark Brown
-@color2:                #F77825; //Orange
-@color3:                #D3CE3D; //YellowGreen
-@color4:                #F1EFA5; //CreamyGreen
-@color5:                #60B99A; //BlueGreen
+//@color1:                #554236; //Dark Brown
+//@color2:                #F77825; //Orange
+//@color3:                #D3CE3D; //YellowGreen
+//@color4:                #F1EFA5; //CreamyGreen
+//@color5:                #60B99A; //BlueGreen
 
 // Good Friends http://www.colourlovers.com/palette/77121/Good_Friends
-//@color1:                #D9CEB2; //PaleBrown
-//@color2:                #948C75; //GreyBrown
-//@color3:                #D5DED9; //BlueGrey
-//@color4:                #7A6A53; //MidBrown
-//@color5:                #99B2B7; //Bluey
+@cream:                 #D9CEB2;
+@brown-light:           #948C75;
+@blue-light:            #D5DED9;
+@brown:                 #5C503F;
+@blue:                  #99B2B7;
+
+@accent-color:          @brown-light;
+@header-bg:             @blue;
+@header-fg:             @blue-light;
+@panel-bg:              @brown;
+@panel-fg:              @cream;
+
+@sidebar-primary:       @blue;
+@sidebar-secondary:     lighten(@blue-light, 10%);
 
 // bootstrap colors
-@brand-primary:         @color2;
+@brand-primary:         @accent-color;
 @brand-success:         #5cb85c;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 @brand-info:            #5bc0de;
 
-
-@accent-color:          @color2;
-@header-bg:             @color3;
-@header-fg:             @color1;
-@panel-bg:              @color5;
-@panel-fg:              @color3;
-
 // Scaffolding
 // -------------------------
 
-@body-bg:               @color1;
-@text-color:            @color4;
+@body-bg:               @blue-light;
+@text-color:            @brown;
 
 // Links
 // -------------------------
 
-@link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);
+@link-color:            @accent-color;
+@link-hover-color:      @text-color;
 
 // Typography
 // -------------------------

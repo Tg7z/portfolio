@@ -34,9 +34,14 @@
 
     border: 0px solid transparent;
     border-right-width: 1px;
-    border-right-color: @white;
+    border-right-color: @sidebar-secondary;
     border-left-width: 1px;
-    border-left-color: @gray-lighter;
+    border-left-color: @sidebar-primary;
+  }
+
+  hr {
+    border-top-color: @sidebar-primary;
+    border-bottom: 1px solid @sidebar-secondary;
   }
 
   h5 {
@@ -46,8 +51,8 @@
     margin: 0 0 16px 0;
 
     text-transform: uppercase;
-    text-shadow: 1px 1px 0 @white;
-    color: #CCC;
+    text-shadow: 1px 1px 0 @sidebar-secondary;
+    color: @sidebar-primary;
     font-size: 13px;
 
     &:after {
@@ -62,9 +67,9 @@
 
       border: 0px solid transparent;
       border-top-width: 1px;
-      border-top-color: #CCC;
-      //border-bottom-width: 1px;
-      //border-bottom-color: @white;
+      border-top-color: @sidebar-primary;
+      border-bottom-width: 1px;
+      border-bottom-color: @sidebar-secondary;
     }
   }
 
