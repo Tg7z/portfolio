@@ -1780,6 +1780,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .social-links a {
   margin-right: 6px;
 }
+.social-links a:hover,
+.social-links a:focus {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
 .sidebar-profile-img {
   margin-bottom: 12px;
 }
