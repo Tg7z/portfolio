@@ -37,8 +37,9 @@ angular.module('portfolio.controllers', [])
       var refPost = new Firebase(FBURL).child('/posts/' + $scope.postId);
       $scope.data = $firebase(refPost);
       $scope.data.$on('change', function() {
-        if ($scope.data.title) {
-          $scope.pagetitle.pagename = $scope.data.title + " - Autodidaktos";
+        var title = $scope.data.title
+        if (title) {
+          $scope.pagetitle.pagename = title + " - Autodidaktos";
         }
       });
       $scope.htmlUnsafe = function() {
@@ -96,7 +97,7 @@ angular.module('portfolio.controllers', [])
     ['$scope', '$location', function($scope, $location) {
       $scope.query = $location.search().q;
       $scope.keywordSearch = function() {
-        $location.path('/search').search('q', $scope.query);
+        $location.path('/search').search('q', this.query);
       };
   }])
 
@@ -110,7 +111,7 @@ angular.module('portfolio.controllers', [])
       $scope.login = function(callback) {
         $scope.err = null;
         var redirectTo = '/add';
-        loginService.login($scope.email, $scope.pass, $scope.remember, redirectTo, function(err, user) {
+        loginService.login(this.email, this.pass, this.remember, redirectTo, function(err, user) {
           $scope.err = err||null;
           typeof(callback) === 'function' && callback(err, user);
         });

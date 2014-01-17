@@ -1,12 +1,12 @@
 <header class="blog-header">
   <h1><a href="#/" title="Return to all posts">Autodidaktos</a></h1>
   <div class="header-search">
-    <form role="search" name="search">
+    <form role="search" name="search" ng-submit="keywordSearch()">
       <label for="query" class="sr-only">Search</label>
       <div class="input-group">
         <input type="text" class="form-control" name="query" ng-model="query" placeholder="Search...">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="keywordSearch()">Go!</button>
+          <input class="btn btn-default" type="submit" value="Go!">
         </span>
       </div>
     </form>
