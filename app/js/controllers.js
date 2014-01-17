@@ -97,7 +97,9 @@ angular.module('portfolio.controllers', [])
     ['$scope', '$location', function($scope, $location) {
       $scope.query = $location.search().q;
       $scope.keywordSearch = function() {
-        $location.path('/search').search('q', this.query);
+        if (this.query) {
+          $location.path('/search').search('q', this.query);
+        }
       };
   }])
 
