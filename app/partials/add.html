@@ -37,7 +37,7 @@
       <div class="input-group tag-control">
         <input type="text" class="form-control" ng-model="newTag" name="add_tag" typeahead="tag for tag in tagList | filter:$viewValue | limitTo:8" typeahead-loading="loadingTags" typeahead-on-select="addTag()">
         <span class="input-group-btn">
-          <button class="btn btn-success" ng-click="addTag()" type="button"><i class="glyphicon glyphicon-plus"></i> tag</button>
+          <button class="btn btn-primary" ng-click="addTag()" type="button"><i class="glyphicon glyphicon-plus"></i> tag</button>
         </span>
       </div>
       <ul class="blog-tags">
@@ -55,7 +55,7 @@
     <div class="checkbox">
       <label><input ng-model="post.featured" type="checkbox"> This is a <em>featured post</em></label>
     </div>
-    <button class="btn btn-primary" ng-click="savePost()">Post!</button>
+    <button class="btn btn-success" ng-click="savePost()">Post!</button>
     <button class="btn btn-default" ng-click="resetForm()">Reset</button>
   </form>
 </div>
