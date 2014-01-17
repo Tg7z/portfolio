@@ -1,15 +1,31 @@
 .blog-header {
-  overflow: hidden;
-  position: absolute;
+  position: fixed;
+  z-index: 9999;
 
   top: 0;
-  left: 0;
-  right: 0;
+  left: 40px;
+  right: 40px;
   height: 80px;
-  padding: 0 40px;
 
-  background-color: @white;
-  border-bottom: 3px solid @gray-light;
+  background-color: @header-bg;
+  box-shadow: 0 -8px 26px 4px @header-fg;
+
+  h1 { color: @header-fg; }
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    width:40px;
+    background-color: @header-bg;
+  }
+  &:before {
+    left: -40px;
+  }
+  &:after {
+    right: -40px;
+  }
 }
 
 .sidebar {
@@ -32,9 +48,14 @@
 
     border: 0px solid transparent;
     border-right-width: 1px;
-    border-right-color: @white;
+    border-right-color: @sidebar-secondary;
     border-left-width: 1px;
-    border-left-color: @gray-lighter;
+    border-left-color: @sidebar-primary;
+  }
+
+  hr {
+    border-top-color: @sidebar-primary;
+    border-bottom: 1px solid @sidebar-secondary;
   }
 
   h5 {
@@ -44,8 +65,8 @@
     margin: 0 0 16px 0;
 
     text-transform: uppercase;
-    text-shadow: 1px 1px 0 @white;
-    color: #CCC;
+    text-shadow: 1px 1px 0 @sidebar-secondary;
+    color: @sidebar-primary;
     font-size: 13px;
 
     &:after {
@@ -60,9 +81,9 @@
 
       border: 0px solid transparent;
       border-top-width: 1px;
-      border-top-color: #CCC;
-      //border-bottom-width: 1px;
-      //border-bottom-color: @white;
+      border-top-color: @sidebar-primary;
+      border-bottom-width: 1px;
+      border-bottom-color: @sidebar-secondary;
     }
   }
 
