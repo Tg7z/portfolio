@@ -11,8 +11,18 @@
   box-shadow: 0 -8px 26px 4px @header-fg;
 
   h1 {
-    color: @header-fg;
     margin-right:280px;
+
+    a {
+      color: @header-fg;
+      text-decoration: none;
+
+      &:hover, &:focus {
+        color: @header-fg;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+      }
+    }
   }
   &:before, &:after {
     content: '';
