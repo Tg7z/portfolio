@@ -26,9 +26,10 @@
   background-size: contain;
   background-position: center top;
   background-color: @white;
-  border: 4px solid @panel-bg;
+  border: 4px solid @brown;
   border-radius: 6px;
-  color: @panel-fg;
+  color: @cream;
+  text-shadow: 1px 1px 0 darken(@brown, 15%);
 
   h2 {
     display: block;
@@ -40,11 +41,11 @@
     padding: 0.7em 0.6em 0.5em;
 
     font-size: 16px;
-    background-color: @panel-bg;
+    background-color: @brown;
   }
 
   &:hover {
-    color: lighten(@panel-fg, 10%);
+    color: lighten(@cream, 10%);
     opacity: 0.8;
     filter: alpha(opacity=80);
   }

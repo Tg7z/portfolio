@@ -7,18 +7,22 @@
   right: 40px;
   height: 80px;
 
-  background-color: @header-bg;
-  box-shadow: 0 -8px 26px 4px @header-fg;
+  background-color: @blue-light;
+  box-shadow: 0 -8px 26px 4px @blue;
 
   h1 {
-    margin-right:280px;
+    font-family: "Sansita One", sans-serif; //"Cabin Sketch"
+    margin: 12px 280px 0 0;
+    font-size: 60px;
 
     a {
-      color: @header-fg;
+      padding-left: 6px;
+      color: @blue;
+      text-shadow: 1px 1px 0 @blue-lighter;
       text-decoration: none;
 
       &:hover, &:focus {
-        color: @header-fg;
+        color: @blue;
         opacity: 0.8;
         filter: alpha(opacity=80);
       }
@@ -31,7 +35,7 @@
     top: 0;
     bottom: 0;
     width:40px;
-    background-color: @header-bg;
+    background-color: @blue-light;
   }
   &:before {
     left: -40px;
@@ -43,7 +47,7 @@
 
 .header-search {
   position: absolute;
-  top: 22px;
+  top: 32px;
   right: 0;
   width: 240px;
 }
@@ -68,14 +72,14 @@
 
     border: 0px solid transparent;
     border-right-width: 1px;
-    border-right-color: @sidebar-secondary;
+    border-right-color: @blue-lighter;
     border-left-width: 1px;
-    border-left-color: @sidebar-primary;
+    border-left-color: @blue;
   }
 
   hr {
-    border-top-color: @sidebar-primary;
-    border-bottom: 1px solid @sidebar-secondary;
+    border-top-color: @blue;
+    border-bottom: 1px solid @blue-lighter;
   }
 
   h5 {
@@ -85,8 +89,8 @@
     margin: 0 0 16px 0;
 
     text-transform: uppercase;
-    text-shadow: 1px 1px 0 @sidebar-secondary;
-    color: @sidebar-primary;
+    text-shadow: 1px 1px 0 @blue-lighter;
+    color: @blue;
     font-size: 13px;
 
     &:after {
@@ -101,9 +105,9 @@
 
       border: 0px solid transparent;
       border-top-width: 1px;
-      border-top-color: @sidebar-primary;
+      border-top-color: @blue;
       border-bottom-width: 1px;
-      border-bottom-color: @sidebar-secondary;
+      border-bottom-color: @blue-lighter;
     }
   }
 
