@@ -103,6 +103,16 @@ angular.module('portfolio.controllers', [])
       };
   }])
 
+  .controller('CvCtrl',
+    ['$scope', function($scope) {
+      $scope.pagetitle.pagename = "Curriculum Vitae of Tim Geurts - Autodidaktos";
+  }])
+
+  .controller('BioCtrl',
+    ['$scope', function($scope) {
+      $scope.pagetitle.pagename = "More about the author: Tim Geurts - Autodidaktos";
+  }])
+
   .controller('LoginCtrl',
     ['$scope', 'loginService', function($scope, loginService) {
       $scope.pagetitle.pagename = "Login - Autodidaktos";

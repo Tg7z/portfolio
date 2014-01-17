@@ -40,11 +40,13 @@ angular.module('portfolioApp',
     })
 
     .when('/cv', {
-      templateUrl: 'partials/cv.html'
+      templateUrl: 'partials/cv.html',
+      controller: 'CvCtrl'
     })
 
     .when('/bio', {
-      templateUrl: 'partials/bio.html'
+      templateUrl: 'partials/bio.html',
+      controller: 'BioCtrl'
     })
 
     .when('/login', {
