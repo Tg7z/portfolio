@@ -2291,17 +2291,33 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 0.2em 0;
 }
 .blog-header {
-  overflow: hidden;
-  position: absolute;
+  position: fixed;
+  z-index: 9999;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 40px;
+  right: 40px;
   height: 80px;
-  padding: 0 40px;
-  background-color: #99b2b7;
+  background-color: #d5ded9;
+  box-shadow: 0 -8px 26px 4px #99b2b7;
 }
 .blog-header h1 {
-  color: #d5ded9;
+  color: #99b2b7;
+}
+.blog-header:before,
+.blog-header:after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background-color: #d5ded9;
+}
+.blog-header:before {
+  left: -40px;
+}
+.blog-header:after {
+  right: -40px;
 }
 .sidebar {
   position: absolute;

@@ -1,17 +1,31 @@
 .blog-header {
-  overflow: hidden;
-  position: absolute;
+  position: fixed;
+  z-index: 9999;
 
   top: 0;
-  left: 0;
-  right: 0;
+  left: 40px;
+  right: 40px;
   height: 80px;
-  padding: 0 40px;
 
   background-color: @header-bg;
-  //border-bottom: 3px solid @header-fg;
+  box-shadow: 0 -8px 26px 4px @header-fg;
 
   h1 { color: @header-fg; }
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    width:40px;
+    background-color: @header-bg;
+  }
+  &:before {
+    left: -40px;
+  }
+  &:after {
+    right: -40px;
+  }
 }
 
 .sidebar {
