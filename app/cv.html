@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/img/ico/apple-touch-icon-57-precomposed.png" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/folio.css?v=1.0">
+  <link rel="stylesheet" href="css/app.min.css?v=1.0">
 
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -35,13 +35,11 @@
 </head>
 
 <body>
-	<!--[if lt IE 8]>
+	<!--[if IE]>
 	    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
-  <div class="col-group">
-    <div class="col-mb-12" portfolio-cv ng-mask></div>
-  </div>
+  <div portfolio-cv ng-mask></div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.min.js"></script>

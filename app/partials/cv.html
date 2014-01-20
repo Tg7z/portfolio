@@ -1,67 +1,52 @@
-<div class="col-group">
-  <div class="col-mb-8">
-    <h1>{{bio.name}}</h1>
-    <p>
-      <a ng-href="mailto:{{bio.email}}" title="Please email me with any queries">{{bio.email}}</a><br>
-      <a ng-href="{{bio.site_url}}" title="See a selection of the profession projects I have worked on">Portfolio Website</a><br>
-      <a ng-href="tel:{{bio.phone | nospace}}">{{bio.phone}}</a><br>
-      <a ng-href="{{bio.linkedin}}" title="Visit my LinkedIn profile">li</a> <a ng-href="{{bio.git}}" title="Find me on github">gh</a> <a href="{{bio.twitter}}" title="Follow me on Twitter">tw</a>
-    </p>
-
-  </div>
-  <div class="col-mb-4">
-    <img class="profile-photo" ng-src="{{bio.profile_image}}?s=180" alt="Photo of {{bio.name}}" />
-  </div>
+<div class="cv-header">
+  <h1>{{bio.name}}</h1>
+</div>
+<div class="cv-sidebar">
+  <img class="cv-photo" ng-src="{{bio.profile_image}}?s=200" alt="Photo of {{bio.name}}" />
+  <ul class="list-unstyled cv-contact">
+    <li><a ng-href="mailto:{{bio.email}}" title="Please email me with any queries">{{bio.email}}</a></li>
+    <li><a ng-href="{{bio.site_url}}" title="See a selection of the profession projects I have worked on">Portfolio Website</a></li>
+    <li><a ng-href="tel:{{bio.phone | nospace}}">{{bio.phone}}</a></li>
+    <li class="social-links"><a ng-href="{{bio.linkedin}}" title="Visit my LinkedIn profile"><img src="img/ico/li.png" alt="LinkedIn icon"></a> <a ng-href="{{bio.git}}" title="Find me on GitHub"><img src="img/ico/gh.png" alt="GitHub icon"></a> <a ng-href="{{bio.twitter}}" title="Follow me on Twitter"><img src="img/ico/tw.png" alt="Twitter icon"></a></li>
+  </ul>
 </div>
 
-<div class="col-group">
-  <div class="col-mb-12">
+<div class="cv-content">
+  <div class="cv-section">
     <h2>Objectives</h2>
     <p>I would like to be a team member in a creative challenging and collaborative environment, where my passion and knowledge of web-design and development will be well utilized, challenged and developed.</p>
     <p>Often frustrated by counter-intuitive user experiences and excited by the challenge of emerging technologies and the ever changing ways we interact with the web; I hope to contribute to solutions that are not only beautiful but also intuitive for end users and easily maintainable for future developers.</p>
+    <hr>
   </div>
-</div>
 
-<div class="col-group">
-  <div class="col-mb-12">
-    <h2>Relevant Experience</h2>
-    <p class="text-muted">References available on <a class="text-muted" ng-href="{{bio.linkedin}}" title="View my references on LinkedIn">LinkedIn</a> or by request</p>
-    <p>2011 - 2013</p>
-    <h3>Graphic Designer / Front End Developer at E-see International</h3>
+  <div class="cv-section">
+    <h2 style="margin-bottom: 0px;">Relevant Experience</h2>
+    <h5 class="cv-references">References available on <a ng-href="{{bio.linkedin}}" title="View my references on LinkedIn">LinkedIn</a> or by request</h5>
+    <h3>Graphic Designer / Front End Developer at <a href="http://e-see.com" title="Visit the e-see website" target="_blank">E-see International</a></h3>
+    <h5 class="cv-date">2011 - 2013</h5>
     <p>Duties included: designing &amp; building websites from client briefs, troubleshooting for clients, general design tasks, photographing products.</p>
     <p>This position though fairly broad in its duties is where I started to gain an interesting in web design and development. As my role in the company developed I started working increasingly more on web projects and built apon my basic HTML, CSS and JavaScript developing a good working knowledge. The need for well designed user experiences and maintainable clean code have become keen interests of mine along with the potential of emerging client side MV* frameworks such as AngularJS and Ember.</p>
-    <p>2007 - 2010</p>
     <h3>Sessional Assistant at The University of Waikato</h3>
+    <h5 class="cv-date">2007 - 2010</h5>
     <p>Duties included: assisting students, supervising and marking test, tutoring classes, writing and refreshing lab manuals.</p>
     <p>This position helped me to develop strong critiquing skills and the ability to articulate complex topics to people with little to no knowledge of the technologies involved.</p>
+    <hr>
   </div>
-</div>
 
-<div class="col-group">
-  <div class="col-mb-12">
+  <div class="cv-section">
     <h2>Education</h2>
-    <p>The University of Waikato 2006 - 2010</p>
     <h3>Honors in Computer Graphic Design (BCGD hons)</h3>
+    <h5 class="cv-date">The University of Waikato, 2006 - 2010</h5>
     <p>This course focused on digitally created designs with an emphasis on introducing students to a broad range of diciplines ranging from web to print media to motion graphics.</p>
-    <p>In my honors year I conducted a study into <a href="#" class="text-muted" title="Is there a design style in corporate identity that is effective and persistent and how can this be used to our advantage in the recession?">branding techniques and their longevity</a>.</p>
+    <p>In my honors year I conducted a study into <a href="downloads/Tim-Geurts-Dissertation-2010.pdf" title="Is there a design style in corporate identity that is effective and persistent and how can this be used to our advantage in the recession?" target="_blank">branding techniques and their longevity</a>.</p>
+    <hr>
   </div>
-</div>
 
-<div class="col-group">
-  <div class="col-mb-12">
+  <div class="cv-section">
     <h2>Skills</h2>
-    <ul class="list-unstyled">
-      <li ng-repeat="skill in data.skills">{{skill}}</li>
+    <ul class="cv-skills">
+      <li ng-repeat="skill in bio.skills">{{skill}}</li>
     </ul>
-    <p>Perhaps more importantly I can think outside the box to find creative solutions to difficult problems and quickly grasp new concepts</p>
+    <p>Perhaps more importantly I can think outside the box to find creative solutions to difficult problems and quickly grasp new concepts.</p>
   </div>
 </div>
-
-<!--div class="col-group">
-  <div class="col-mb-12">
-    <h2>References</h2>
-  </div>
-  <div class="col-mb-12 col-4"></div>
-  <div class="col-mb-12 col-4"></div>
-  <div class="col-mb-12 col-4"></div>
-</div-->
