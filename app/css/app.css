@@ -257,7 +257,7 @@ html {
 }
 body {
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #5c503f;
   background-color: #d5ded9;
@@ -311,15 +311,15 @@ img {
   border-radius: 50%;
 }
 hr {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 0;
   border-top: 1px solid #99b2b7;
   border-bottom: 1px solid #f2f4f3;
 }
 hr.thin {
-  margin-top: 12.5px;
-  margin-bottom: 12.5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .sr-only {
   position: absolute;
@@ -379,8 +379,8 @@ h6 .small,
 h1,
 h2,
 h3 {
-  margin-top: 25px;
-  margin-bottom: 12.5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 h1 small,
 h2 small,
@@ -393,8 +393,8 @@ h3 .small {
 h4,
 h5,
 h6 {
-  margin-top: 12.5px;
-  margin-bottom: 12.5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 h4 small,
 h5 small,
@@ -406,40 +406,40 @@ h6 .small {
 }
 h1,
 .h1 {
-  font-size: 64px;
+  font-size: 50px;
 }
 h2,
 .h2 {
-  font-size: 38px;
+  font-size: 30px;
 }
 h3,
 .h3 {
-  font-size: 31px;
+  font-size: 24px;
 }
 h4,
 .h4 {
-  font-size: 23px;
+  font-size: 18px;
 }
 h5,
 .h5 {
-  font-size: 18px;
+  font-size: 14px;
 }
 h6,
 .h6 {
-  font-size: 16px;
+  font-size: 12px;
 }
 p {
-  margin: 0 0 12.5px;
+  margin: 0 0 10px;
 }
 .lead {
-  margin-bottom: 25px;
-  font-size: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
   font-weight: 200;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
   .lead {
-    font-size: 27px;
+    font-size: 21px;
   }
 }
 small,
@@ -464,7 +464,7 @@ cite {
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 12.5px;
+  margin-bottom: 10px;
 }
 ul ul,
 ol ul,
@@ -490,7 +490,7 @@ ol ol {
 }
 dl {
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 dt,
 dd {
@@ -503,7 +503,7 @@ dd {
   margin-left: 0;
 }
 address {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-style: normal;
   line-height: 1.428571429;
 }
@@ -516,8 +516,8 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 25px;
-  font-size: 27px;
+  margin-bottom: 20px;
+  font-size: 21px;
   line-height: inherit;
   color: #333333;
   border: 0;
@@ -566,7 +566,7 @@ input[type="number"]::-webkit-inner-spin-button {
 output {
   display: block;
   padding-top: 9px;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
   vertical-align: middle;
@@ -574,9 +574,9 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 43px;
-  padding: 8px 14px;
-  font-size: 18px;
+  height: 38px;
+  padding: 8px 12px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
   vertical-align: middle;
@@ -623,7 +623,7 @@ textarea.form-control {
 .radio,
 .checkbox {
   display: block;
-  min-height: 25px;
+  min-height: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 20px;
@@ -676,29 +676,29 @@ fieldset[disabled] .checkbox-inline {
   cursor: not-allowed;
 }
 .input-sm {
-  height: 40px;
-  padding: 7px 12px;
-  font-size: 16px;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 select.input-sm {
-  height: 40px;
-  line-height: 40px;
+  height: 30px;
+  line-height: 30px;
 }
 textarea.input-sm {
   height: auto;
 }
 .input-lg {
-  height: 57px;
-  padding: 12px 18px;
-  font-size: 23px;
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
 select.input-lg {
-  height: 57px;
-  line-height: 57px;
+  height: 46px;
+  line-height: 46px;
 }
 textarea.input-lg {
   height: auto;
@@ -817,7 +817,7 @@ textarea.input-lg {
 }
 .form-horizontal .radio,
 .form-horizontal .checkbox {
-  min-height: 34px;
+  min-height: 29px;
 }
 .form-horizontal .form-group {
   margin-left: -16px;
@@ -857,8 +857,8 @@ textarea.input-lg {
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  padding: 8px 14px;
-  font-size: 18px;
+  padding: 8px 12px;
+  font-size: 14px;
   line-height: 1.428571429;
   border-radius: 4px;
   -webkit-user-select: none;
@@ -1174,20 +1174,20 @@ fieldset[disabled] .btn-link:focus {
   text-decoration: none;
 }
 .btn-lg {
-  padding: 12px 18px;
-  font-size: 23px;
+  padding: 10px 16px;
+  font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
 .btn-sm {
-  padding: 7px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 .btn-xs {
-  padding: 1px 4px;
-  font-size: 16px;
+  padding: 1px 5px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
@@ -1915,20 +1915,20 @@ input[type="button"].btn-block {
   outline: 0;
 }
 .btn-group-xs > .btn {
-  padding: 1px 4px;
-  font-size: 16px;
+  padding: 1px 5px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 .btn-group-sm > .btn {
-  padding: 7px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 .btn-group-lg > .btn {
-  padding: 12px 18px;
-  font-size: 23px;
+  padding: 10px 16px;
+  font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
@@ -2046,17 +2046,17 @@ input[type="button"].btn-block {
 .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
-  height: 57px;
-  padding: 12px 18px;
-  font-size: 23px;
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
 select.input-group-lg > .form-control,
 select.input-group-lg > .input-group-addon,
 select.input-group-lg > .input-group-btn > .btn {
-  height: 57px;
-  line-height: 57px;
+  height: 46px;
+  line-height: 46px;
 }
 textarea.input-group-lg > .form-control,
 textarea.input-group-lg > .input-group-addon,
@@ -2066,17 +2066,17 @@ textarea.input-group-lg > .input-group-btn > .btn {
 .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn {
-  height: 40px;
-  padding: 7px 12px;
-  font-size: 16px;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
 select.input-group-sm > .form-control,
 select.input-group-sm > .input-group-addon,
 select.input-group-sm > .input-group-btn > .btn {
-  height: 40px;
-  line-height: 40px;
+  height: 30px;
+  line-height: 30px;
 }
 textarea.input-group-sm > .form-control,
 textarea.input-group-sm > .input-group-addon,
@@ -2100,8 +2100,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   vertical-align: middle;
 }
 .input-group-addon {
-  padding: 8px 14px;
-  font-size: 18px;
+  padding: 8px 12px;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1;
   color: #555555;
@@ -2111,13 +2111,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-radius: 4px;
 }
 .input-group-addon.input-sm {
-  padding: 7px 12px;
-  font-size: 16px;
+  padding: 5px 10px;
+  font-size: 12px;
   border-radius: 3px;
 }
 .input-group-addon.input-lg {
-  padding: 12px 18px;
-  font-size: 23px;
+  padding: 10px 16px;
+  font-size: 18px;
   border-radius: 6px;
 }
 .input-group-addon input[type="radio"],
@@ -2193,7 +2193,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 5px 0;
   margin: 2px 0 0;
   list-style: none;
-  font-size: 18px;
+  font-size: 14px;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -2208,7 +2208,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .dropdown-menu .divider {
   height: 1px;
-  margin: 11.5px 0;
+  margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
@@ -2257,7 +2257,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .dropdown-header {
   display: block;
   padding: 3px 20px;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.428571429;
   color: #999999;
 }
@@ -2290,6 +2290,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background: #999999;
   color: #5c503f;
   padding: 0.2em 0;
+}
+body {
+  font-size: 18px;
 }
 .blog-header {
   position: fixed;
@@ -2339,6 +2342,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   top: 32px;
   right: 0;
   width: 240px;
+}
+.header-search .input-group > .form-control {
+  height: 37px;
 }
 .sidebar {
   position: absolute;
