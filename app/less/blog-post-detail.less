@@ -1,5 +1,9 @@
 .post-content {
 
+  p {
+    max-width: 960px;
+  }
+
   h2 {
     margin-bottom: 4px;
     margin-top: 14px;
@@ -58,5 +62,26 @@
     content: "";
     display: table;
     margin-top: 75%; /* 4:3 aspect ratio */
+  }
+}
+
+.post-row {
+  .clearfix();
+  margin-bottom: 16px;
+}
+.post-column {
+  width: 100%;
+}
+
+@media (min-width: 1320px) {
+  .post-column {
+    width: 50%;
+    float: left;
+  }
+  .post-column:nth-child(odd) {
+    padding-right: 20px;
+  }
+  .post-column:nth-child(even) {
+    padding-left: 20px;
   }
 }

@@ -2466,7 +2466,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .release-date {
   border-bottom-left-radius: 4px !important;
   border-top-left-radius: 4px !important;
-  margin: 37px 0;
+  margin: 46px 0;
 }
 .release-time {
   background-color: transparent;
@@ -2531,6 +2531,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   .blog-post:first-child {
     width: 100% !important;
   }
+}
+.post-content p {
+  max-width: 960px;
 }
 .post-content h2 {
   margin-bottom: 4px;
@@ -2606,6 +2609,40 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: table;
   margin-top: 75%;
   /* 4:3 aspect ratio */
+}
+.post-row {
+  margin-bottom: 16px;
+}
+.post-row:before,
+.post-row:after {
+  content: " ";
+  display: table;
+}
+.post-row:after {
+  clear: both;
+}
+.post-row:before,
+.post-row:after {
+  content: " ";
+  display: table;
+}
+.post-row:after {
+  clear: both;
+}
+.post-column {
+  width: 100%;
+}
+@media (min-width: 1320px) {
+  .post-column {
+    width: 50%;
+    float: left;
+  }
+  .post-column:nth-child(odd) {
+    padding-right: 20px;
+  }
+  .post-column:nth-child(even) {
+    padding-left: 20px;
+  }
 }
 .cv-header {
   position: fixed;
