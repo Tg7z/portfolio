@@ -2294,6 +2294,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
 body {
   font-size: 18px;
 }
+.checkbox,
+.radio {
+  font-size: 14px;
+}
+.input-group-btn > .btn {
+  height: 34px;
+}
 .blog-header {
   position: fixed;
   z-index: 9999;
@@ -2344,7 +2351,7 @@ body {
   width: 240px;
 }
 .header-search .input-group > .form-control {
-  height: 37px;
+  height: 33px;
 }
 .sidebar {
   position: absolute;
@@ -2472,7 +2479,11 @@ body {
 .release-date {
   border-bottom-left-radius: 4px !important;
   border-top-left-radius: 4px !important;
-  margin: 46px 0;
+  margin: 35px 0;
+  height: 35px;
+}
+.release-date ~ .input-group-btn > .btn {
+  height: 34px;
 }
 .release-time {
   background-color: transparent;
