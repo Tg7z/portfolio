@@ -12,7 +12,7 @@ angular.module('portfolio.controllers', [])
     function($rootScope, $scope, $firebase, loginService, FBURL) {
       // Set default page title and allow it to be changed in child controllers
       $scope.pagetitle = {};
-      $scope.pagetitle.pagename = "Autodidaktos";
+      $scope.pagetitle.pagename = "Didacticode";
 
       var refBio = new Firebase(FBURL).child('/bio');
       $scope.bio = $firebase(refBio);
@@ -25,7 +25,7 @@ angular.module('portfolio.controllers', [])
   .controller('BlogCtrl',
     ['$scope', '$firebase', 'FBURL',
     function($scope, $firebase, FBURL) {
-      $scope.pagetitle.pagename = "All Posts - Autodidaktos";
+      $scope.pagetitle.pagename = "All Posts - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
   }])
@@ -39,7 +39,7 @@ angular.module('portfolio.controllers', [])
       $scope.data.$on('change', function() {
         var title = $scope.data.title
         if (title) {
-          $scope.pagetitle.pagename = title + " - Autodidaktos";
+          $scope.pagetitle.pagename = title + " - Didacticode";
         }
       });
       $scope.htmlUnsafe = function() {
@@ -51,7 +51,7 @@ angular.module('portfolio.controllers', [])
     ['$scope', '$routeParams', '$firebase', 'FBURL',
     function($scope, $routeParams, $firebase, FBURL) {
       $scope.tag = $routeParams.tag;
-      $scope.pagetitle.pagename = "Posts tagged " + $scope.tag + " - Autodidaktos";
+      $scope.pagetitle.pagename = "Posts tagged " + $scope.tag + " - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
   }])
@@ -60,7 +60,7 @@ angular.module('portfolio.controllers', [])
     ['$scope', '$location', '$firebase', 'FBURL',
     function($scope, $location, $firebase, FBURL) {
       $scope.q = $location.search();
-      $scope.pagetitle.pagename = "Search results - Autodidaktos";
+      $scope.pagetitle.pagename = "Search results - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
   }])
@@ -105,17 +105,17 @@ angular.module('portfolio.controllers', [])
 
   .controller('CvCtrl',
     ['$scope', function($scope) {
-      $scope.pagetitle.pagename = "Curriculum Vitae of Tim Geurts - Autodidaktos";
+      $scope.pagetitle.pagename = "Curriculum Vitae of Tim Geurts - Didacticode";
   }])
 
   .controller('BioCtrl',
     ['$scope', function($scope) {
-      $scope.pagetitle.pagename = "More about the author: Tim Geurts - Autodidaktos";
+      $scope.pagetitle.pagename = "More about the author: Tim Geurts - Didacticode";
   }])
 
   .controller('LoginCtrl',
     ['$scope', 'loginService', function($scope, loginService) {
-      $scope.pagetitle.pagename = "Login - Autodidaktos";
+      $scope.pagetitle.pagename = "Login - Didacticode";
       $scope.email = null;
       $scope.pass = null;
       $scope.remember = true;
@@ -145,7 +145,7 @@ angular.module('portfolio.controllers', [])
           // set data in form when its loaded from firebase
           $scope.master.$on('change', function() {
             $scope.pageHeading = 'Edit post: ' + $scope.master.title;
-            $scope.pagetitle.pagename = "Edit " + $scope.master.title + " - Autodidaktos";
+            $scope.pagetitle.pagename = "Edit " + $scope.master.title + " - Didacticode";
             // remove any AngularFire function
             angular.forEach($scope.master, function(value, key){
               if (typeof value === 'function') {
@@ -159,7 +159,7 @@ angular.module('portfolio.controllers', [])
           });
         } else {
           $scope.pageHeading = 'Add Post';
-          $scope.pagetitle.pagename = "Add Post - Autodidaktos";
+          $scope.pagetitle.pagename = "Add Post - Didacticode";
           // Set default form values
           $scope.master = { author: "Tim Geurts", tags: [] };
         }
