@@ -63,6 +63,10 @@
     display: table;
     margin-top: 75%; /* 4:3 aspect ratio */
   }
+  .post-data h2 {
+    font-size: 11px;
+    padding: 0.6em 0.5em 0.4em;
+  }
 }
 
 .post-row {
@@ -83,5 +87,37 @@
   }
   .post-column:nth-child(even) {
     padding-left: 20px;
+  }
+  .recent-post .post-data h2 {
+    font-size: 14px;
+    padding: 0.6em 0.5em 0.3em;
+  }
+}
+
+@media (max-width:960px) {
+  // over-ride gridFit script for smaller devices
+  .recent-post {
+    width: 50% !important;
+    float: left !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  .recent-posts {
+    margin-right: -22px;
+  }
+}
+
+@media (max-width: 767px) {
+  .recent-posts {
+    margin-right: -16px;
+  }
+}
+
+@media (max-width: 567px) {
+  .recent-posts {
+    margin-right: -8px;
   }
 }
