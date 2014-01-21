@@ -1,0 +1,50 @@
+.blog-bio {
+  margin-right: 0;
+  .clearfix();
+
+  p {
+    max-width: 960px;
+  }
+}
+
+.bio-self {
+  float: left;
+  width: 50%;
+  padding-right: 20px;
+}
+
+.bio-blog {
+  float: left;
+  width: 50%;
+  padding-left: 20px;
+}
+
+.cv-btn {
+  margin-top: 32px;
+}
+
+@media (max-width: 767px) {
+  .bio-self {
+    width: 100%;
+    padding-right: 0;
+    float: none;
+  }
+
+  .bio-blog {
+    width: 100%;
+    padding-left: 0;
+    float: none;
+  }
+}
+
+@media (min-width: 960px) {
+  .bio-self {
+    width: 67%;
+    padding-right: 20px;
+  }
+
+  .bio-blog {
+    width: 33%;
+    padding-left: 20px;
+  }
+}
