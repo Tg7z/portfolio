@@ -2435,6 +2435,7 @@ body .menu-mask {
 @media (max-width: 767px) {
   body {
     font-size: 14px;
+    overflow-x: hidden;
   }
   body .menu-mask {
     display: block;
