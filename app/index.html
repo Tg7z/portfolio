@@ -34,12 +34,13 @@
   <![endif]-->
 </head>
 
-<body>
+<body ng-class="{'menu': mobilemenu}">
 	<!--[if IE]>
 	    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
   <div ng-view ng-mask></div>
+  <div class="menu-mask" ng-click="closeMenu()">&nbsp;</div>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js"></script>

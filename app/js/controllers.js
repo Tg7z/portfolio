@@ -13,12 +13,21 @@ angular.module('portfolio.controllers', [])
       // Set default page title and allow it to be changed in child controllers
       $scope.pagetitle = {};
       $scope.pagetitle.pagename = "Didacticode";
+      $scope.mobilemenu = false;
 
       var refBio = new Firebase(FBURL).child('/bio');
       $scope.bio = $firebase(refBio);
 
       $scope.logout = function() {
         loginService.logout('/login');
+      };
+      $scope.openMenu = function() {
+        console.log('open menu');
+        $scope.mobilemenu = true;
+      };
+      $scope.closeMenu = function() {
+        console.log('close menu');
+        $scope.mobilemenu = false;
       };
   }])
 
