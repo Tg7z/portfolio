@@ -3021,7 +3021,7 @@ body .menu-mask {
     float: left;
   }
   .cv-contact {
-    font-size: 14px;
+    font-size: 13px;
   }
   .cv-content {
     margin: 0;
@@ -3172,6 +3172,9 @@ body .menu-mask {
 .sansita {
   font-family: "Sansita One", sans-serif;
 }
+.mobile-only {
+  display: none;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -3218,4 +3221,9 @@ body .menu-mask {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
 }

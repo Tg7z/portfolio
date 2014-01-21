@@ -7,6 +7,10 @@
   font-family: "Sansita One", sans-serif;
 }
 
+.mobile-only {
+  display: none;
+}
+
 // Floats
 // -------------------------
 
@@ -64,4 +68,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// For display only on mobile
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
 }
