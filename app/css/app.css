@@ -2471,6 +2471,15 @@ body .menu-mask {
     visibility: visible;
     right: 220px;
   }
+  h2 {
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
   .blog-header {
     height: 52px;
     left: 20px;
@@ -2558,6 +2567,12 @@ body .menu-mask {
   .sidebar:after {
     top: 0;
     bottom: 0;
+  }
+  .sidebar h4 {
+    font-size: 18px;
+  }
+  .sidebar h5 {
+    font-size: 11px;
   }
   .sidebar-tags {
     margin-bottom: 20px;
@@ -2692,6 +2707,7 @@ body .menu-mask {
 @media (max-width: 767px) {
   #blog-posts {
     margin-right: -16px;
+    margin-top: 12px;
   }
   .post-data {
     bottom: 16px;
