@@ -22,13 +22,17 @@ angular.module('portfolio.controllers', [])
         loginService.logout('/login');
       };
       $scope.openMenu = function() {
-        console.log('open menu');
         $scope.mobilemenu = true;
       };
       $scope.closeMenu = function() {
-        console.log('close menu');
         $scope.mobilemenu = false;
       };
+
+      $scope.$on('$routeChangeSuccess', function(ev, current, prev){
+        if ($scope.mobilemenu) {
+          $scope.closeMenu();
+        }
+      });
   }])
 
   .controller('BlogCtrl',
