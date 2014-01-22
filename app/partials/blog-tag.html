@@ -4,6 +4,7 @@
 <div class="blog-content">
   <h2>Posts Tagged: {{tag}}</h2>
   <ul id="blog-posts" tile-grid>
+    <li class="post-loader"><img src="img/load.gif"></li>
     <li ng-repeat="post in posts | searchTag:tag | releaseDate | tileSize" class="blog-post" data-grid-size="{{post.size}}" on-finish-render>
       <div class="height-spacer"></div>
       <a ng-href="#/posts/{{post.id}}" class="post-data" title="{{post.title}}" ng-class="{'img-fullbleed': post.bleed}" style="background-image: url('img/posts/{{post.hero_img}}')">

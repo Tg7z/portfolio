@@ -5,6 +5,7 @@
   <h2>Search Results</h2>
   <h4>Query: {{q.q}}</h4>
   <ul id="blog-posts" tile-grid>
+    <li class="post-loader"><img src="img/load.gif"></li>
     <li ng-repeat="post in posts | searchQuery:q | releaseDate | tileSize" class="blog-post" data-grid-size="{{post.size}}" on-finish-render>
       <div class="height-spacer"></div>
       <a ng-href="#/posts/{{post.id}}" class="post-data" title="{{post.title}}" ng-class="{'img-fullbleed': post.bleed}" style="background-image: url('img/posts/{{post.hero_img}}')">

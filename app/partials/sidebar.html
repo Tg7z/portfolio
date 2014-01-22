@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="sidebar-profile">
     <h5>The Author</h5>
-    <img class="img-responsive sidebar-profile-img" ng-src="{{bio.profile_image}}?s=200" alt="Photo of {{bio.name}}">
+    <img class="img-responsive sidebar-profile-img" src="img/load.gif" ng-src="{{bio.profile_image}}" alt="Photo of {{bio.name}}">
     <h4>{{bio.name}}</h4>
     <ul class="list-unstyled">
       <li><a href="#/tags/Portfolio" title="View my portfolio">Portfolio</a></li>
@@ -16,6 +16,7 @@
   </div>
   <div class="sidebar-tags">
     <h5>Tags</h5>
-    <ul blog-tags></ul>
+    <ul blog-tags>
+    </ul>
   </div>
 </div>

@@ -1,4 +1,5 @@
 <ul class="recent-posts">
+  <li class="recent-loader"><img src="img/load.gif"></li>
   <li ng-repeat="post in recentPosts | excludePost:postId | releaseDate | limitTo:4" class="recent-post">
     <a ng-href="#/posts/{{post.id}}" class="post-data" title="{{post.title}}" ng-class="{'img-fullbleed': post.bleed}" style="background-image: url('img/posts/{{post.hero_img}}')">
       <h2 class="post-title truncate">{{post.title}}</h2>

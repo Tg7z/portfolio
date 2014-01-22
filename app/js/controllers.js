@@ -41,6 +41,11 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "All Posts - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      $scope.posts.$on('change', function(){
+        if ($scope.posts){
+          angular.element(document.querySelector('.post-loader')).remove();
+        }
+      });
   }])
 
   .controller('PostCtrl',
@@ -50,13 +55,18 @@ angular.module('portfolio.controllers', [])
       var refPost = new Firebase(FBURL).child('/posts/' + $scope.postId);
       $scope.data = $firebase(refPost);
       $scope.data.$on('change', function() {
-        var title = $scope.data.title
+        var title = $scope.data.title;
         if (title) {
           $scope.pagetitle.pagename = title + " - Didacticode";
         }
+        if ($scope.data){
+          angular.element(document.querySelector('.post-loader')).remove();
+        }
       });
       $scope.htmlUnsafe = function() {
-        return $sce.trustAsHtml($scope.data.content);
+        if ($scope.data.content) {
+          return $sce.trustAsHtml($scope.data.content);
+        }
       };
   }])
 
@@ -67,6 +77,11 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "Posts tagged " + $scope.tag + " - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      $scope.posts.$on('change', function(){
+        if ($scope.posts){
+          angular.element(document.querySelector('.post-loader')).remove();
+        }
+      });
   }])
 
   .controller('SearchCtrl',
@@ -76,12 +91,22 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "Search results - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      $scope.posts.$on('change', function(){
+        if ($scope.posts){
+          angular.element(document.querySelector('.post-loader')).remove();
+        }
+      });
   }])
 
   .controller('RecentPostsCtrl',['$scope', '$firebase', 'FBURL',
     function($scope, $firebase, FBURL) {
       var refPosts = new Firebase(FBURL).child('/posts').limit(10);
       $scope.recentPosts = $firebase(refPosts);
+      $scope.recentPosts.$on('change', function(){
+        if ($scope.recentPosts){
+          angular.element(document.querySelector('.recent-loader')).remove();
+        }
+      });
   }])
 
   .controller('TileGridCtrl',
@@ -104,6 +129,11 @@ angular.module('portfolio.controllers', [])
     function($scope, $firebase, FBURL) {
       var refTags = new Firebase(FBURL).child('/tags');
       $scope.tagData = $firebase(refTags);
+      $scope.tagData.$on('change', function(){
+        if ($scope.tagData){
+          angular.element(document.querySelector('.tagcloud-loader')).remove();
+        }
+      });
   }])
 
   .controller('HeaderCtrl',
@@ -178,7 +208,7 @@ angular.module('portfolio.controllers', [])
         }
 
         // Default tag list
-        $scope.tagList = ["Portfolio", "JavaScript", "AngularJS", "AngularFire", "Firebase", "HTML", "CSS", "App"];
+        $scope.tagList = ["Portfolio", "JavaScript", "AngularJS", "AngularFire", "Firebase", "HTML", "CSS", "App", "WebApp"];
         $scope.tagData = $firebase(refTags);
         $scope.newTag = null;
       }
