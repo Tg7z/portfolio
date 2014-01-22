@@ -1,6 +1,3 @@
-// Account controllers could be re-written to give a html/body level account state accessible to all elements
-// Login and logout functionality would be housed there and the new/edit account functionality can be housed in seperate controllers
-
 'use strict';
 
 /* Controllers */
@@ -27,7 +24,7 @@ angular.module('portfolio.controllers', [])
       $scope.closeMenu = function() {
         $scope.mobilemenu = false;
       };
-
+      // remove loaded when content loaded
       $scope.$on('$routeChangeSuccess', function(ev, current, prev){
         if ($scope.mobilemenu) {
           $scope.closeMenu();
@@ -41,6 +38,7 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "All Posts - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      // remove loaded when content loaded
       $scope.posts.$on('change', function(){
         if ($scope.posts){
           angular.element(document.querySelector('.post-loader')).remove();
@@ -55,14 +53,17 @@ angular.module('portfolio.controllers', [])
       var refPost = new Firebase(FBURL).child('/posts/' + $scope.postId);
       $scope.data = $firebase(refPost);
       $scope.data.$on('change', function() {
+        // Change page title when content is available
         var title = $scope.data.title;
         if (title) {
           $scope.pagetitle.pagename = title + " - Didacticode";
         }
+        // remove loaded when content loaded
         if ($scope.data){
           angular.element(document.querySelector('.post-loader')).remove();
         }
       });
+      // required to input all styles etc, default sanitization is a little extreme
       $scope.htmlUnsafe = function() {
         if ($scope.data.content) {
           return $sce.trustAsHtml($scope.data.content);
@@ -77,6 +78,7 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "Posts tagged " + $scope.tag + " - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      // remove loaded when content loaded
       $scope.posts.$on('change', function(){
         if ($scope.posts){
           angular.element(document.querySelector('.post-loader')).remove();
@@ -91,6 +93,7 @@ angular.module('portfolio.controllers', [])
       $scope.pagetitle.pagename = "Search results - Didacticode";
       var refPosts = new Firebase(FBURL).child('/posts');
       $scope.posts = $firebase(refPosts);
+      // remove loaded when content loaded
       $scope.posts.$on('change', function(){
         if ($scope.posts){
           angular.element(document.querySelector('.post-loader')).remove();
@@ -102,6 +105,7 @@ angular.module('portfolio.controllers', [])
     function($scope, $firebase, FBURL) {
       var refPosts = new Firebase(FBURL).child('/posts').limit(10);
       $scope.recentPosts = $firebase(refPosts);
+      // remove loaded when content loaded
       $scope.recentPosts.$on('change', function(){
         if ($scope.recentPosts){
           angular.element(document.querySelector('.recent-loader')).remove();
@@ -113,9 +117,11 @@ angular.module('portfolio.controllers', [])
     ['$scope', '$window', function($scope, $window) {
       $scope.rowHeight = 0;
       $scope.gridfillOptions = { cols: 3, tile_ratio: '4:3', selector: 'blog-posts', tileSelector: 'blog-post' };
+      // layout grid only when all tiles exist, prevents running script every time an item it loaded
       $scope.$parent.$on('ngRepeatFinished', function() {
         gridfill.initialize($scope.gridfillOptions);
       });
+      //  use script to layout grid when window is big enough
       $window.onresize = function() {
         var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         if (width >= 960) {
