@@ -2286,10 +2286,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: 1px;
 }
 .browsehappy {
-  margin: 0.2em 0;
-  background: #999999;
-  color: #5c503f;
-  padding: 0.2em 0;
+  background: #f2dede;
+  color: #d9534f;
+  padding: 0.3em 0.4em;
 }
 body {
   font-size: 18px;
