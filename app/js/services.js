@@ -17,7 +17,7 @@
         // Note that this doesn't handle
         // toString and toValue enumeration bugs in IE < 9
         for (var key in obj) {
-            if (hasOwnProperty.call(obj, key)) { return false; }
+          if (hasOwnProperty.call(obj, key)) { return false; }
         }
         // Otherwise assume empty
         return true;
