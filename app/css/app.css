@@ -514,6 +514,9 @@ table {
 th {
   text-align: left;
 }
+.header-row {
+  background-color: #f2f4f3;
+}
 .table {
   width: 100%;
   margin-bottom: 20px;
@@ -3143,6 +3146,26 @@ body .menu-mask {
   margin-left: 280px;
   padding: 1px 40px 20px;
   max-width: 960px;
+  margin-right: 0;
+}
+.cv-content:before,
+.cv-content:after {
+  content: " ";
+  display: table;
+}
+.cv-content:after {
+  clear: both;
+}
+.cv-content:before,
+.cv-content:after {
+  content: " ";
+  display: table;
+}
+.cv-content:after {
+  clear: both;
+}
+.cv-content p {
+  max-width: 960px;
 }
 .cv-content h2 {
   font-family: "Sansita One", sans-serif;
@@ -3203,6 +3226,14 @@ body .menu-mask {
   width: 280px;
 }
 @media (max-width: 767px) {
+  .cv-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+  }
   .cv-header {
     position: static;
     padding: 10px 20px;

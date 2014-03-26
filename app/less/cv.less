@@ -71,6 +71,12 @@
   margin-left: 280px;
   padding: 1px 40px 20px;
   max-width: 960px;
+  margin-right: 0;
+  .clearfix();
+
+  p {
+    max-width: 960px;
+  }
 
   h2 {
     .sansita();
@@ -141,6 +147,14 @@
 }
 
 @media (max-width: 767px) {
+  .cv-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+  }
   .cv-header {
     position: static;
     padding: 10px 20px;
